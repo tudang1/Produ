@@ -4,10 +4,7 @@ import com.example.backend.entity.Category;
 import com.example.backend.entity.Product;
 import com.example.backend.service.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,19 +19,32 @@ public class WebController {
         return webService.getAllProducts();
     }
 
-    //tìm kiếm products theo title
-    @GetMapping("/products")
-    public List<Product> getProducts(@RequestParam(required = false) String title){
-        return webService.getProducts(title);
+    //tìm kiếm product theo category
+    @GetMapping("/products/{category}")
+    public List<Product> getProductsByCategory(@PathVariable String category){
+        return webService.getProductsByCategory(category);
     }
+
+    //tìm kiếm product theo category
+    @GetMapping("/products/{category}/{id}")
+    public List<Product> getProductsByCategoryAndId(@PathVariable String category,
+                                               @PathVariable Integer id){
+        return webService.getProductsByCategoryAndId(category,id);
+    }
+
+    //tìm kiếm products theo title
+//    @GetMapping("/products")
+//    public List<Product> getProducts(@RequestParam(required = false) String title){
+//        return webService.getProducts(title);
+//    }
 
     //tìm kiếm nước hoa theo giới tính
     @GetMapping("/man")
     public List<Product> getFragranceOfMan(){
         return webService.getFragranceOfMan();
     }
-    
-    @GetMapping("/Woman")
+
+    @GetMapping("/woman")
     public List<Product> getFragranceOfWoman(){
         return webService.getFragranceOfWoman();
     }
