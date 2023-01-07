@@ -1,5 +1,6 @@
 package com.example.backend.request;
 
+import com.example.backend.entity.Category;
 import com.example.backend.entity.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,8 +20,8 @@ public class UpsertProductRequest {
 
     private String description;
 
-    private Image image;
+    private String imageUrl;
 
-    private Set<Integer> categoryIds;
+    private Integer categoryId;
 
 }

@@ -32,16 +32,6 @@ public class WebService {
         return categoryRepository.findAll();
     }
 
-    //tim product(nc hoa) theo giới tính
-    public List<Product> getFragranceOfMan() {
-        return productRepository.findByGenderTrue();
-    }
-
-    //tim product(nc hoa) theo giới tính
-    public List<Product> getFragranceOfWoman() {
-        return productRepository.findByGenderFalse();
-    }
-
     //tim product theo category
     public List<Product> getProductsByCategory(String category) {
         return productRepository.findByCategory_NameEquals(category);

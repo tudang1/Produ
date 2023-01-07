@@ -38,17 +38,6 @@ public class WebController {
 //        return webService.getProducts(title);
 //    }
 
-    //tìm kiếm nước hoa theo giới tính
-    @GetMapping("/man")
-    public List<Product> getFragranceOfMan(){
-        return webService.getFragranceOfMan();
-    }
-
-    @GetMapping("/woman")
-    public List<Product> getFragranceOfWoman(){
-        return webService.getFragranceOfWoman();
-    }
-
     // gọi tất ca category
     @GetMapping("/categories")
     public List<Category> getCategories(){

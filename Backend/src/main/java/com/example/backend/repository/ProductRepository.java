@@ -8,10 +8,6 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findByTitleContains(String title);
 
-    List<Product> findByGenderTrue();
-
-    List<Product> findByGenderFalse();
-
     List<Product> findByCategory_NameEquals(String name);
 
     List<Product> findByCategory_NameEqualsAndId(String name, Integer id);

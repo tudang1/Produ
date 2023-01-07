@@ -91,9 +91,14 @@ public class InitDataTest {
         categoryRepository.save(category1);
 
         Category category2 = Category.builder()
-                .name("Fragrance")
+                .name("MEN'S FRAGRANCE")
                 .build();
         categoryRepository.save(category2);
+
+        Category category3 = Category.builder()
+                .name("WOMEN'S FRAGRANCE")
+                .build();
+        categoryRepository.save(category3);
     }
 
     //tạo Images
@@ -161,7 +166,6 @@ public class InitDataTest {
                 .description("Born out of creativity and authenticity, Sauvage celebrates the skill and knowledge of exceptional craftsmen, fully dedicated to their art. No matter where they come from or what trade they practice, they have devoted their whole lives to their passion.\n" +
                         "\n" +
                         "Between the riff of a guitar and the trail of this new Elixir, it's naturally a matter of notes...")
-                .gender(true)
                 .category(categories.get(2))
                 .image(images.get(0))
                 .build();
@@ -177,7 +181,6 @@ public class InitDataTest {
                         "Dior Homme conveys all the facets of modern masculinity. A man, yes, but a man of many nuances: confident in both his strength and his tenderness.\n" +
                         "\n" +
                         "Dior Homme Eau de Toilette is a fragrance with a bold trail that leaves a sensual imprint.")
-                .gender(true)
                 .category(categories.get(2))
                 .image(images.get(1))
                 .build();
@@ -187,7 +190,6 @@ public class InitDataTest {
                 .title("FAHRENHEIT")
                 .price(14000)
                 .description("Fahrenheit Parfum invents a power of attraction. An immediately addictive trail that highlights the harmony of extraordinary olfactory accords. A scented script that blends extremes, where flower meets leather and woods. The legendary signature of the Fahrenheit fragrance is wrapped in a vibrant, sensual accord with accents of Violet and Leather, enhanced by Bourbon Vanilla absolute. The irresistible attraction of a fragrance exalted by rare ingredients.")
-                .gender(true)
                 .category(categories.get(2))
                 .image(images.get(2))
                 .build();
@@ -200,8 +202,7 @@ public class InitDataTest {
                 .description("Miss Dior Eau de Parfum reinvents itself with a new scent.\n" +
                         "\n" +
                         "In 1947, Miss Dior was born out of a wild impetus where the pressing desire to re-enchant the lives of women and open up their eyes, once again, to the sparkling colors of love was felt. Following a bleak period, at that time this scent was synonymous with renewed happiness, poetry, and harmony for Christian Dior. Miss Dior intrigues, excites and invites us to marvel at love and all the beauty in the world.")
-                .gender(false)
-                .category(categories.get(2))
+                .category(categories.get(3))
                 .image(images.get(3))
                 .build();
         productRepository.save(missDior);
@@ -212,8 +213,7 @@ public class InitDataTest {
                 .description("The new fragrance, a concentration of water and flowers: J'adore Parfum d'eau reinvents the promise of pleasure that J’adore has upheld since 1999.\n" +
                         "\n" +
                         "The pleasure of a reinvented J'adore bouquet with a strong natural focus: Neroli from Vallauris injects its full freshness into J'adore Parfum d'eau, while sunny notes of jasmine sambac meld with velvety notes of Chinese magnolia. A genuine ode to the white flowers of J'adore in a fresh and spontaneous interpretation.")
-                .gender(false)
-                .category(categories.get(2))
+                .category(categories.get(3))
                 .image(images.get(4))
                 .build();
         productRepository.save(jadore);

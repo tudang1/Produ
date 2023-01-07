@@ -33,9 +33,6 @@ public class Product {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "gender")
-    private boolean gender;
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
