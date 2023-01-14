@@ -14,14 +14,20 @@ public class WebController {
     @Autowired
     private WebService webService;
 
-    @GetMapping("/products")
-    public List<Product> getAllProducts(){
-        return webService.getAllProducts();
-    }
+//    @GetMapping("/products")
+//    public List<Product> getAllProducts(){
+//        return webService.getAllProducts();
+//    }
 
-    //tìm kiếm product theo category
-    @GetMapping("/products/{category}")
-    public List<Product> getProductsByCategory(@PathVariable String category){
+//    //tìm kiếm product theo category
+//    @GetMapping("/products/{category}")
+//    public List<Product> getProductsByCategory(@PathVariable String category){
+//        return webService.getProductsByCategory(category);
+//    }
+
+    //tim kiếm product theo category
+    @GetMapping("/products")
+    public List<Product> getProductsByCategory(@RequestParam String category){
         return webService.getProductsByCategory(category);
     }
 

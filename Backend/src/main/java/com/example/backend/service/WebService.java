@@ -34,6 +34,7 @@ public class WebService {
 
     //tim product theo category
     public List<Product> getProductsByCategory(String category) {
+        log.info("category {}", category);
         return productRepository.findByCategory_NameEquals(category);
     }
 
