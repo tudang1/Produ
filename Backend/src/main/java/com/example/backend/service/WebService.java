@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.entity.Category;
 import com.example.backend.entity.Product;
+import com.example.backend.exception.NotFoundException;
 import com.example.backend.repository.CategoryRepository;
 import com.example.backend.repository.ProductRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -40,5 +41,11 @@ public class WebService {
 
     public List<Product> getProductsByCategoryAndId(String category, Integer id) {
         return productRepository.findByCategory_NameEqualsAndId(category,id);
+    }
+
+    public Product getProductById(Integer id) {
+        return productRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Not found Product with id = " + id);
+        });
     }
 }

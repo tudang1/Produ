@@ -38,11 +38,11 @@ public class WebController {
         return webService.getProductsByCategoryAndId(category,id);
     }
 
-    //tìm kiếm products theo title
-//    @GetMapping("/products")
-//    public List<Product> getProducts(@RequestParam(required = false) String title){
-//        return webService.getProducts(title);
-//    }
+    //tìm kiếm products theo id
+    @GetMapping("/products/{id}")
+    public Product getProductById(@PathVariable Integer id){
+        return webService.getProductById(id);
+    }
 
     // gọi tất ca category
     @GetMapping("/categories")
