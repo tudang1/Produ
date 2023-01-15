@@ -648,22 +648,22 @@ button {
     }
 }
 
-.image-blog {
+.image-product {
     width: 100%;
 }
 
-.image-blog img {
+.image-product img {
     object-fit: cover;
 }
 
-.blog-info {
+.product-info {
     padding: 8px 16px;
 }
 .page-link {
     color: var(--black);
 }
 
-.time-blog, .by {
+.time-product, .by {
     font-size: 12px;
 }
 
@@ -671,20 +671,20 @@ button {
     font-size: 14px;
 }
 
-.menu-blog .sub-title:hover {
+.menu-product .sub-title:hover {
     cursor: pointer;
     color: var(--red);
 }
 
-.card-blog-thumbnail:hover {
+.card-product-thumbnail:hover {
     cursor: pointer;
     color: var(--red);
 }
 
-.item-blog {
+.item-product {
     transition: all 0.3s;
 }
-.item-blog:hover {
+.item-product:hover {
     transform: scale(1.08);
     cursor: pointer;
     color: var(--red);
@@ -2868,36 +2868,36 @@ img {
     height: 100%;
     object-fit: cover;
 }
-/* Section blog */
-.blog-info {
+/* Section product */
+.product-info {
     height: 100%;
     background-color: var(--blue);
     padding: 12px 15px;
 }
 
-.time-blog {
+.time-product {
     font-size: 12px;
 }
 
-#blog p {
+#product p {
     margin-bottom: 12px !important;
 }
 
-.image-blog {
+.image-product {
     width: 100%;
     height: 100%;
 }
 
-.image-blog img {
+.image-product img {
     height: 100%;
     object-fit: cover;
 }
 
 
-.blog-item {
+.product-item {
     overflow: hidden;
 }
-.blog-item:hover {
+.product-item:hover {
     box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -3102,8 +3102,8 @@ img {
     .product-user {
         display: none;
     }
-    /* blog */
-    .blog-item {
+    /* product */
+    .product-item {
         flex-direction: column;
     }
     /* Footer */
@@ -3157,4 +3157,76 @@ img {
     .btn-create {
         margin-bottom: 16px;
     }
+  
+
+
+/* CSS */
+.button-17 {
+  align-items: center;
+  appearance: none;
+  background-color: #fff;
+  border-radius: 24px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #3c4043;
+  cursor: pointer;
+  display: inline-flex;
+  fill: currentcolor;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: .25px;
+  line-height: normal;
+  max-width: 100%;
+  overflow: visible;
+  padding: 2px 24px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  will-change: transform,opacity;
+  z-index: 0;
+}
+
+.button-17:hover {
+  background: #F6F9FE;
+  color: #174ea6;
+}
+
+.button-17:active {
+  box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+  outline: none;
+}
+
+.button-17:focus {
+  outline: none;
+  border: 2px solid #4285f4;
+}
+
+.button-17:not(:disabled) {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.button-17:not(:disabled):hover {
+  box-shadow: rgba(60, 64, 67, .3) 0 2px 3px 0, rgba(60, 64, 67, .15) 0 6px 10px 4px;
+}
+
+.button-17:not(:disabled):focus {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
+
+.button-17:not(:disabled):active {
+  box-shadow: rgba(60, 64, 67, .3) 0 4px 4px 0, rgba(60, 64, 67, .15) 0 8px 12px 6px;
+}
+
+.button-17:disabled {
+  box-shadow: rgba(60, 64, 67, .3) 0 1px 3px 0, rgba(60, 64, 67, .15) 0 4px 8px 3px;
+}
 }

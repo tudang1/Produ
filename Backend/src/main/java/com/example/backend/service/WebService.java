@@ -34,6 +34,11 @@ public class WebService {
     }
 
     //tim product theo category
+//    public List<Product> getProductsByCategory(String search,String category) {
+//        log.info("search {}", search);
+//        log.info("category {}", category);
+//        return productRepository.findByTitleContainsIgnoreCaseAndCategories_NameIgnoreCaseOrderByPublishedAtDesc(search, category);
+//    }
     public List<Product> getProductsByCategory(String category) {
         log.info("category {}", category);
         return productRepository.findByCategory_NameEquals(category);
