@@ -27,7 +27,7 @@ public class WebController {
 
     //tim kiếm product theo category
     @GetMapping("/products")
-    public List<Product> getProductsByCategory(@RequestParam String category){
+    public List<Product> getProductsByCategory(@RequestParam(required = false) String category){
         return webService.getProductsByCategory(category);
     }
 
