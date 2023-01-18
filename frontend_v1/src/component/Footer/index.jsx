@@ -27,22 +27,19 @@ function Footer() {
           </a>
         </div>
         <div className="col-lg-3 col-md-6 col-sm-6">
-          <h5 className="text-dark mb-3 title-footer mt-5">HÕ TRỢ KHÁCH HÀNG</h5>
+          <h5 className="text-dark mb-3 title-footer mt-5">SERVICE</h5>
           <a href="#">
-            <p>Chính sách bảo mật</p>
+            <p>Contact</p>
           </a>
           <a href="#">
-            <p>Chính sách vận chuyển</p>
+            <p>Delivery and returns</p>
           </a>
           <a href="#">
-            <p>Chính sách đổi trả</p>
-          </a>
-          <a href="#">
-            <p>Hình thức thanh toán</p>
+            <p>FQA</p>
           </a>
         </div>
         <div className="col-lg-3 col-md-6 col-sm-6">
-          <h5 className="text-dark mb-3 title-footer mt-5">Chi Nhánh</h5>
+          <h5 className="text-dark mb-3 title-footer mt-5">STORE</h5>
           <a href="#">
             <p>Cầu Giấy - Hà Nội</p>
           </a>

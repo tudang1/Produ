@@ -49,9 +49,9 @@ function ProductsFindByCategory() {
   }, [filter]);
 
   return (
-    <div className="course-container mt-5">
-      <h4 className='text-dark d-flex justify-content-center mb-3'>{category}</h4>
-      <h6 className='text-dark d-flex justify-content-center mb-3'>OUR SELECTION</h6>
+    <div className="course-container mt-3">
+      <h5 className='text-dark d-flex justify-content-center mb-3'>{category}</h5>
+      <h7 className='text-dark d-flex justify-content-center mb-3'>OUR SELECTION</h7>
         <div className="container">
           <div className="row">
             <div className="col-md-16">

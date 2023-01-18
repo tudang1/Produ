@@ -80,9 +80,9 @@ function Home() {
         className="carousel slide"
         data-bs-ride="carousel"
       >
-        <h7 className="multiline-text d-flex justify-content-center text-dark ">
+        <h6 className="multiline-text d-flex justify-content-center text-dark mb-3 ">
           NEW ARRIVALS
-        </h7>
+        </h6>
         <div className="carousel-inner">
           <img
             src="https://www.dior.com/couture/var/dior/storage/images/25632090/15-eng-GB/01-sauvage-elixir-20212_1440_1200.jpg"
