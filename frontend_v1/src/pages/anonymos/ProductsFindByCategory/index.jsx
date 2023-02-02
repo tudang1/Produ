@@ -54,7 +54,7 @@ function ProductsFindByCategory() {
       <h7 className='text-dark d-flex justify-content-center mb-3'>OUR SELECTION</h7>
         <div className="container">
           <div className="row">
-            <div className="col-md-16">
+            <div className="col-md-12">
               <div className="course-list row">
                 {products.length > 0 && 
                   products.map((product) => (
@@ -62,7 +62,7 @@ function ProductsFindByCategory() {
                       <Link to={`/products/${product.id}`}>
                         <div className="course-item shadow-sm rounded mb-4">
                           <div className="course-item-image text-center">
-                            <img src={product.image.imageUrl} alt={product.title} width={400} height={400}/>
+                            <img src={product.image.imageUrl} alt={product.title} width={370} height={350}/>
                           </div>
                           <div className="course-item-info p-1">
                             <h2 className="fs-5 mb-2 text-dark d-flex justify-content-center">

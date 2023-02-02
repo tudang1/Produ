@@ -7,24 +7,14 @@ function Footer() {
       <div className="row">
         <div className="col-lg-3 col-md-6 col-sm-6">
           <div className="logo text-decoration-underline my-3">4U</div>
-          <a href="#">
-            <p>GPKD số: 58A8011955</p>
-          </a>
-          <a href="#">
-            <p>Ngày cấp: 12/12/2022</p>
-          </a>
-          <a href="#">
-            <p>Cấp bởi: Hà Nội</p>
-          </a>
-          <a href="#">
-            <p>Đ/c: Thái Bình</p>
-          </a>
-          <a href="#">
-            <p>Sđt : 099999999</p>
-          </a>
-          <a href="#">
-            <p>Email: teedangtu@gmail.com</p>
-          </a>
+
+          <p>GPKD số: 58A8011955</p>
+          <p>Ngày cấp: 12/12/2022</p>
+          <p>Cấp bởi: Hà Nội</p>
+          <p>Đ/c: Thái Bình</p>
+          <p>Sđt : 099999999</p>
+          <p>Email: teedangtu@gmail.com</p>
+    
         </div>
         <div className="col-lg-3 col-md-6 col-sm-6">
           <h5 className="text-dark mb-3 title-footer mt-5">SERVICE</h5>

@@ -6,7 +6,7 @@ function ProductDetail() {
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
-  const [image,setImage] = useState([]);
+  const [image, setImage] = useState([]);
 
   //lấy product
   useEffect(() => {
@@ -22,71 +22,86 @@ function ProductDetail() {
     };
     fetchProduct();
   }, []);
-//   console.log(product.image.imageUrl);
+  //   console.log(product.image.imageUrl);
   return (
-    <div className="course-container mt-5">
-      {/* <div className="container">
-        <div className="row justify-content-center">
-          <div className="col-md-10">
-            <div className="mb-4">
-              <nav
-                style={{ "--bs-breadcrumb-divider": "'>'" }}
-                aria-label="breadcrumb"
-              >
-                <ol className="breadcrumb">
-                  <li className="breadcrumb-item">
-                    <Link to={`/products?category=${category}`}>
-                      {category}
-                    </Link>
-                  </li>
-                  <li className="breadcrumb-item active" aria-current="page">
-                    {product.title}
-                  </li>
-                </ol>
-              </nav>
-            </div>
+    <div className="course-container mt-6">
+      <div className="mt-1 mx-5 ">
+        <nav
+          style={{ "--bs-breadcrumb-divider": "'/'" }}
+          aria-label="breadcrumb"
+        >
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
+              <Link to={`/products?category=${category}`}>{category}</Link>
+            </li>
+            <li className="breadcrumb-item active" aria-current="page">
+              {product.title}
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-md-5 mb-4">
+            <p className="product-image "></p>
+            <img src={image} alt={product.title} width={500} height={500} />
+          </div>
 
-            <div className="main p-4 shadow-sm">
-              <h2 className="course-title fs-5">{product.title}</h2>
-
-              <hr />
-
-              <div className="course-description">
-                <p>{product.description}</p>
+          <div className="col-md-7 pl-5">
+            <div className="product-detail">
+              <h5 className="pt-4">
+                <p href="#">{product.title}</p>
+              </h5>
+              <div class="star">
+                <span>
+                  <i class="fa-solid fa-star"></i>
+                </span>
+                <span>
+                  <i class="fa-solid fa-star"></i>
+                </span>
+                <span>
+                  <i class="fa-solid fa-star"></i>
+                </span>
+                <span>
+                  <i class="fa-solid fa-star"></i>
+                </span>
+                <span>
+                  <i class="fa-solid fa-star"></i>
+                </span>
               </div>
+
+              <span className="price colored">$ {product.price}</span>
+
+              <p>{product.description}</p>
+
+              <label className="screen-reader-text" htmlFor="qty">
+                Quantity
+              </label>
+              <input
+                type="number"
+                id="typeNumber"
+                class="form-control"
+                min="1"
+              ></input>
+              <p></p>
+              <button type="button" class="btn btn-primary btn-block btn-lg">
+                Add To Cart
+              </button>
+              <button
+                type="button"
+                class="btn btn-warning btn-block btn-lg mx-2"
+              >
+                Buy Now
+              </button>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
+      <hr/>
       <div className="container">
-		<div className="row">
-
-			<div className="col-md-6">
-				<p  className="product-image"></p>
-                <img src={image} alt={product.title}/>
-			</div>
-
-			<div className="col-md-6 pl-5">
-				<div className="product-detail">
-					<h5 className="pt-4"><p href="#">{product.title}</p></h5>
-                    <div class="star">
-                      <span><i class="fa-solid fa-star"></i></span><span><i class="fa-solid fa-star"></i></span><span><i class="fa-solid fa-star"></i></span><span><i class="fa-solid fa-star"></i></span><span><i class="fa-solid fa-star"></i></span>
-                    </div>
-	
-					<span className="price colored">$ {product.price}</span>
-
-                    <p>{product.description}</p>
-
-					<label className="screen-reader-text" htmlFor="qty">Quantity</label>
-					<input type="number" id="qty" className="input-text qty text" step="1" min="1" max="" name="quantity" value="1" title="Qty" size="4" placeholder="" inputMode="numeric" width={100}/>
-                    <p></p>
-					<button type="submit" name="add-to-cart" className="button">Add to cart</button>
-
-				</div>
-			</div>
-
-		</div>
-	</div>
+      <h7 className='text-dark d-flex justify-content-center mb-3'>OUR SELECTION</h7>
+      
+      </div>
     </div>
   );
 }
