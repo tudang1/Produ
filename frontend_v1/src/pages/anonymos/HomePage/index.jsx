@@ -93,7 +93,9 @@ function Home() {
           Dior Sauvage
         </span>
         <div className="mb-4 d-flex justify-content-center text-dark">
+          <Link to={`/products/1`}>
           <button className="btn btn-outline-secondary ">Detail</button>
+          </Link>
         </div>
       </div>
     </div>

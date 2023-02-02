@@ -52,21 +52,21 @@ function ProductDetail() {
               <h5 className="pt-4">
                 <p href="#">{product.title}</p>
               </h5>
-              <div class="star">
+              <div className="star">
                 <span>
-                  <i class="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
                 </span>
                 <span>
-                  <i class="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
                 </span>
                 <span>
-                  <i class="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
                 </span>
                 <span>
-                  <i class="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
                 </span>
                 <span>
-                  <i class="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
                 </span>
               </div>
 
@@ -80,27 +80,23 @@ function ProductDetail() {
               <input
                 type="number"
                 id="typeNumber"
-                class="form-control"
+                className="form-control"
                 min="1"
+                
               ></input>
               <p></p>
-              <button type="button" class="btn btn-primary btn-block btn-lg">
+              <button type="button" className="btn btn-primary btn-block btn-lg">
                 Add To Cart
               </button>
               <button
                 type="button"
-                class="btn btn-warning btn-block btn-lg mx-2"
+                className="btn btn-warning btn-block btn-lg mx-2"
               >
                 Buy Now
               </button>
             </div>
           </div>
         </div>
-      </div>
-      <hr/>
-      <div className="container">
-      <h7 className='text-dark d-flex justify-content-center mb-3'>OUR SELECTION</h7>
-      
       </div>
     </div>
   );
