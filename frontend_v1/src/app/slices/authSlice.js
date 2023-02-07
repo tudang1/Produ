@@ -24,8 +24,8 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addMatcher(authService.endpoints.login.matchFulfilled, (state, action) => {
-            const { user, token, isAuthenticated } = action.payload
-            state.auth = user;
+            const { account, token, isAuthenticated } = action.payload
+            state.auth = account;
             state.isAuthenticated = isAuthenticated;
             state.token = token
 
