@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Header() {
   return (
@@ -23,9 +24,9 @@ function Header() {
             <div className="navbar-icon align-items-center justify-content-end">
               <p className="hello mb-0 hide">Xin chào, <span className="username">Khách</span></p>
               <div className="icon fs-4">
-                <button type="button" className="btn px-2" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <Link to={"/admin/login"}>
                   <span className="icon-user"><i className="fa-solid fa-user"></i></span>
-                </button>
+                </Link>
 
                 <a href="./favorite.html"><span className="like-icon-header"><i className="fa-solid fa-heart"></i></span></a>
                 <button className="btn px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
