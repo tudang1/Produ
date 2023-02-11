@@ -31,7 +31,7 @@ function App() {
               <Route index element={<ProductAdminList/>}></Route>
               <Route path='create' element={<ProductAdminCreate />} />
             </Route>
-
+{/* ss */}
           </Route>
         </Route>
 
