@@ -5,6 +5,7 @@ import LayoutAnonymous from './component/LayoutAnonymous';
 import NotFound from './component/NotFound';
 import PrivateRoutes from './component/PrivateRoutes';
 import Login from './pages/admin/Login';
+import ProductAdminCreate from './pages/admin/Product/ProductAdminCreate';
 import ProductAdminList from './pages/admin/Product/ProductAdminList';
 import Home from './pages/anonymos/HomePage';
 import ProductDetail from './pages/anonymos/ProductDetail';
@@ -28,6 +29,7 @@ function App() {
             {/* Product */}
             <Route path='products'>
               <Route index element={<ProductAdminList/>}></Route>
+              <Route path='create' element={<ProductAdminCreate />} />
             </Route>
 
           </Route>

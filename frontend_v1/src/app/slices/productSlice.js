@@ -17,6 +17,9 @@ const productSlice = createSlice({
         let index = state.products.findIndex(product => product.id === action.payload);
             state.products.splice(index, 1);
     })
+    builder.addMatcher(productService.endpoints.createProduct.matchFulfilled, (state, action) => {
+        state.products.push(action.payload);
+    })
 }
 });
 

@@ -42,7 +42,7 @@ function ProductDetail() {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-md-5 mb-4">
+          <div className="cover col-md-5 mb-4">
             <p className="product-image "></p>
             <img src={image} alt={product.title} width={500} height={500} />
           </div>

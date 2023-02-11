@@ -126,13 +126,6 @@ button {
 }
 
 
-.logo {
-    font-family: Blippo, fantasy;
-    font-size: 40px;
-    cursor: pointer;
-}
-
-
 .navbar-icon {
     display: flex;
     height: 100%;
@@ -588,9 +581,6 @@ button {
     }
     .navbar-icon {
         display:none;
-    }
-    .logo {
-        text-align: right;
     }
     /* Footer */
     #footer p {
@@ -1057,12 +1047,6 @@ iframe {
 .menu-bar {
     display: none;
     padding: 0 8px;
-}
-
-.logo {
-    font-family: 'Devonshire', cursive;
-    font-size: 40px;
-    cursor: pointer;
 }
 
 
@@ -3245,3 +3229,54 @@ img {
     margin: 0;
   }
 }
+
+/* Trang chi tiết */
+.supporter-image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+}
+
+#wrapper {
+    overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+    min-height: 100vh;
+    margin-left: -15rem;
+    transition: margin 0.25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+    height: 60px;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    min-width: 100vw;
+}
+
+body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+    margin-left: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+
+    #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+    }
+
+    body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
+        margin-left: -15rem;
+    }
+}
+

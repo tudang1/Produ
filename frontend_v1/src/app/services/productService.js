@@ -14,7 +14,14 @@ export const productService = baseApi.injectEndpoints({
                 return arg
             }
         }),
+        createProduct: builder.mutation({
+            query:(data)=>({
+                url: "/products",
+                method: "POST",
+                body: data
+            })
+        }),
     })
 })
 
-export const { useGetProductsQuery, useDeleteProductMutation } = productService
+export const { useGetProductsQuery, useDeleteProductMutation, useCreateProductMutation } = productService

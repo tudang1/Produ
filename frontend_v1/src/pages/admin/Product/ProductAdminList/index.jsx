@@ -27,8 +27,9 @@ function ProductAdminList() {
     }
 
     return (
-        <div className="course-list mt-4 mb-4">
-            <div className="container">
+        <div className="container">
+            <div className="course-list mt-4 mb-4">
+            <div >
                 <div className="mb-4">
                     <Link
                         to={"/admin/products/create"}
@@ -37,7 +38,7 @@ function ProductAdminList() {
                         <span>
                             <i className="fa-solid fa-plus"></i>
                         </span>
-                        Tạo bài viết
+                        New Product
                     </Link>
                 </div>
 
@@ -66,19 +67,29 @@ function ProductAdminList() {
                                     <td>
                                         <button
                                             className="btn btn-danger"
+                                        
+                                        >
+                                            Edit
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button
+                                            className="btn btn-danger"
                                             onClick={() =>
                                                 handleDeleteProduct(product.id)
                                             }
                                         >
-                                            Xóa
+                                            Delete
                                         </button>
                                     </td>
+                                    
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
             </div>
+        </div>
         </div>
     );
 }
