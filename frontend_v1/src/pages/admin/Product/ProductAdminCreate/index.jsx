@@ -14,7 +14,7 @@ function ProductAdminCreate() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [categoryIds, setCategoryIds] = useState([]);
+  const [categoryId, setCategoryId] = useState([]);
 
   const { categories } = useSelector((state) => state.categories);
   const { isLoading } = useGetCategoriesQuery();
@@ -30,28 +30,29 @@ function ProductAdminCreate() {
 
   // console.log(options);
 
-    const handleCreateProduct = () => {
-      if (!title) {
-        alert("Tiêu đề không được để trống");
-        return;
-      }
-      //tao product moi
-      let newProduct = {
-        title: title,
-        price: price,
-        description: description,
-        imageUrl: imageUrl,
-      };
-      console.log(newProduct);
-      createProduct(newProduct)
-        .unwrap()
-        .then(() => alert("Tạo thành công"))
-        .catch((err) => console.log(err));
-
-      // Dispatch event để tạo todo
-      // dispatch(createProduct());
-      setTitle("");
+  const handleCreateProduct = () => {
+    if (!title) {
+      alert("Tiêu đề không được để trống");
+      return;
+    }
+    //tao product moi
+    let newProduct = {
+      title: title,
+      price: price,
+      description: description,
+      imageUrl: imageUrl,
+      categoryId: categoryId,
     };
+    console.log(newProduct);
+    createProduct(newProduct)
+      .unwrap()
+      .then(() => alert("Tạo thành công"))
+      .catch((err) => console.log(err));
+
+    // Dispatch event để tạo todo
+    // dispatch(createProduct());
+    setTitle("");
+  };
 
   if (isLoading) {
     return <h3>Loading ...</h3>;
@@ -95,16 +96,40 @@ function ProductAdminCreate() {
               </div>
               <div className="mb-3">
                 <label htmlFor="course-content" className="form-label fw-bold">
-                  Description
+                  ImageUrl
                 </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="exampleFormControlInput1"
+                  placeholder="https://"
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                />
+
                 {/* <SimpleMdeReact
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 /> */}
-                <input
+                {/* <input
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                />
+                /> */}
+              </div>
+              <div className="mb-3">
+                <label
+                  htmlFor="exampleFormControlTextarea1 course-content"
+                  className="form-label fw-bold"
+                >
+                  Description
+                </label>
+                <textarea
+                  className="form-control"
+                  id="exampleFormControlTextarea1"
+                  rows="7"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
               </div>
             </div>
             <div className="col-md-4">
@@ -127,7 +152,19 @@ function ProductAdminCreate() {
                 <label htmlFor="course-topic" className="form-label fw-bold">
                   Category
                 </label>
-                <Select options={options} />
+                {/* <Select options={options} /> */}
+                <br />
+                <select
+                  value={categoryId}
+                  onChange={(e) => setCategoryId(e.target.value)}
+                >
+                  <option hidden>Select...</option>
+                  {categories.map((p) => (
+                    <option value={p.id} key={p.id} label= {p.name}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
