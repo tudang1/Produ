@@ -85,11 +85,11 @@ function SidebarAdmin() {
                                             Danh sách Category
                                         </Link>
                                     </li>
-                                    <li className="my-2">
+                                    {/* <li className="my-2">
                                         <Link to={"/admin/categories"}>
                                             Tạo Category
                                         </Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </div>
@@ -123,6 +123,36 @@ function SidebarAdmin() {
                                     <li className="my-2">
                                         <Link to={"/admin/users/create"}>
                                             Tạo user
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="headingFour">
+                            <button
+                                className="accordion-button collapsed"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour"
+                                aria-expanded="false"
+                                aria-controls="collapseFour"
+                            >
+                                Quản lý Đơn Hàng
+                            </button>
+                        </h2>
+                        <div
+                            id="collapseFour"
+                            className="accordion-collapse collapse"
+                            aria-labelledby="headingFour"
+                            data-bs-parent="#accordionExample"
+                        >
+                            <div className="accordion-body">
+                                <ul className="p-0">
+                                    <li className="my-2">
+                                        <Link to={"/admin/users"}>
+                                            Danh sách Đơn Hàng
                                         </Link>
                                     </li>
                                 </ul>

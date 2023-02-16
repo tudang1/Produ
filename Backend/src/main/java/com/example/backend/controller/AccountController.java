@@ -16,31 +16,31 @@ public class AccountController {
     private AccountService accountService;
 
     //1.Lấy danh sách Account
-    @GetMapping("users")
+    @GetMapping("/users")
     public List<Account> accounts(){
         return accountService.getAccounts();
     }
 
     //2. lấy chi tiết Account by email
-    @GetMapping("users/{email}")
+    @GetMapping("/users/{email}")
     public Optional<Account> getAccountByEmail(@PathVariable String email){
         return accountService.getAccountByEmail(email);
     }
 
     //3. tạo mới
-    @PostMapping("users")
+    @PostMapping("/users")
     public Account createAccount(@RequestBody UpsertAccount request){
         return accountService.createAccount(request);
     }
 
     //4. cập nhật
-    @PutMapping("users/{id}")
+    @PutMapping("/users/{id}")
     public Account updateAccount(@PathVariable Integer id, @RequestBody UpsertAccount request){
         return accountService.updateAccount(id,request);
     }
 
     //5.xóa
-    @DeleteMapping("users/{id}")
+    @DeleteMapping("/users/{id}")
     public void deleteAccount(@PathVariable Integer id){
         accountService.deleteAccount(id);
     }

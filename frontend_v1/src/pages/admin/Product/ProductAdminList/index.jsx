@@ -66,10 +66,9 @@ function ProductAdminList() {
                                     <td>{convertDate(product.createdAt)}</td>
                                     <td>
                                         <button
-                                            className="btn btn-danger"
-                                        
+                                            className="btn btn-info"
                                         >
-                                            Edit
+                                            <Link to={`/admin/products/${product.id}`}>Edit</Link>
                                         </button>
                                     </td>
                                     <td>

@@ -16,6 +16,14 @@ const categorySlice = createSlice({
         builder.addMatcher(categoryService.endpoints.createCategory.matchFulfilled, (state, action) => {
             state.categories.push(action.payload);
         })
+        builder.addMatcher(categoryService.endpoints.updateCategory.matchFulfilled, (state,action) => {
+            let index = state.categories.findIndex(category => category.id === action.payload.id);
+            state.categories[index] = action.payload;
+        })
+        builder.addMatcher(categoryService.endpoints.deleteCategory.matchFulfilled, (state, action) => {
+            let index = state.categories.findIndex(category => category.id === action.payload);
+            state.categories.splice(index, 1);
+        })
     }
 });
 

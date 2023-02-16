@@ -4,6 +4,7 @@ import baseApi from "../services/baseService";
 import authReducer from "../slices/authSlice";
 import productReducer from "../slices/productSlice";
 import categoryReducer from "../slices/categorySlice";
+import userReducer from "../slices/userSlice";
 
 const store = configureStore({
     reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
         auth: authReducer,
         products: productReducer,
         categories: categoryReducer,
+        users: userReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(

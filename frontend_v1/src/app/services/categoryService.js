@@ -11,8 +11,29 @@ export const categoryService = baseApi.injectEndpoints({
                 method: "POST",
                 body: data
             })
-        })
+        }),
+        updateCategory: builder.mutation({
+            query:({id,...data})=>({
+                url: `/categories/${id}`,
+                method: "PUT",
+                body: data
+            })
+        }),
+        deleteCategory:  builder.mutation({
+            query: (id) => ({
+                url: `/categories/${id}`,
+                method: "DELETE"
+            }),
+            transformResponse: (response, meta, arg) => {
+                return arg
+            }
+        }),
     })
 })
 
-export const { useGetCategoriesQuery, useCreateCategoryMutation } = categoryService
+export const { 
+    useGetCategoriesQuery, 
+    useCreateCategoryMutation,
+    useUpdateCategoryMutation,
+    useDeleteCategoryMutation
+} = categoryService

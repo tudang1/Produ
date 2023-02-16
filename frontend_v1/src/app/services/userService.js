@@ -1,29 +1,29 @@
 import baseApi from './baseService'
 
-export const productService = baseApi.injectEndpoints({
+export const userService = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getProducts: builder.query({
-            query: () => "/products"
+        getUsers: builder.query({
+            query: () => "/users"
         }),
-        deleteProduct: builder.mutation({
+        deleteUser: builder.mutation({
             query: (id) => ({
-                url: `/products/${id}`,
+                url: `/users/${id}`,
                 method: "DELETE"
             }),
             transformResponse: (response, meta, arg) => {
                 return arg
             }
         }),
-        createProduct: builder.mutation({
+        createUser: builder.mutation({
             query:(data)=>({
-                url: "/products",
+                url: "/users",
                 method: "POST",
                 body: data
             })
         }),
-        updateProduct: builder.mutation({
+        updateUser: builder.mutation({
             query:({id,...data})=>({
-                url: `/products/${id}`,
+                url: `/users/${id}`,
                 method: "PUT",
                 body: data
             })
@@ -32,8 +32,8 @@ export const productService = baseApi.injectEndpoints({
 })
 
 export const { 
-    useGetProductsQuery, 
-    useDeleteProductMutation, 
-    useCreateProductMutation, 
-    useUpdateProductMutation
-} = productService
+    useCreateUserMutation,
+    useDeleteUserMutation,
+    useGetUsersQuery,
+    useUpdateUserMutation
+} = userService

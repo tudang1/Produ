@@ -15,10 +15,14 @@ const productSlice = createSlice({
     })
     builder.addMatcher(productService.endpoints.deleteProduct.matchFulfilled, (state, action) => {
         let index = state.products.findIndex(product => product.id === action.payload);
-            state.products.splice(index, 1);
+        state.products.splice(index, 1);
     })
     builder.addMatcher(productService.endpoints.createProduct.matchFulfilled, (state, action) => {
         state.products.push(action.payload);
+    })
+    builder.addMatcher(productService.endpoints.updateProduct.matchFulfilled, (state,action) =>{
+        let index = state.products.findIndex(product => product.id === action.payload.id);
+        state.products[index] = action.payload;
     })
 }
 });

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 import SimpleMdeReact from "react-simplemde-editor";
 import productsApi from "../../../../app/api/productsApi";
 import { useGetCategoriesQuery } from "../../../../app/services/categoryService";
-import { useCreateProductMutation } from "../../../../app/services/productService";
+import { useCreateProductMutation, useUpdateProductMutation } from "../../../../app/services/productService";
 
-function ProductAdminCreate() {
+function ProductAdminDetail() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
@@ -15,21 +15,33 @@ function ProductAdminCreate() {
   const [imageUrl, setImageUrl] = useState("");
   const [categoryId, setCategoryId] = useState([]);
 
+  const { productId } = useParams();
+  const [product,setProduct] = useState([]);
+
   const { categories } = useSelector((state) => state.categories);
   const { isLoading } = useGetCategoriesQuery();
-  const [createProduct] = useCreateProductMutation();
-  const dispatch = useDispatch();
+  const [updateProduct] = useUpdateProductMutation();
 
-  const options = categories.map((category) => {
-    return {
-      value: category.id,
-      label: category.name,
+  //lấy product
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await productsApi.getProductById(productId);
+        setProduct(res.data);
+        setTitle(res.data.title);
+        setPrice(res.data.price);
+        setCategoryId(res.data.category.id);
+        setImageUrl(res.data.image.imageUrl);
+        setDescription(res.data.description);
+      } catch (e) {
+        console.log(e);
+      }
     };
-  });
+    fetchProduct();
+  }, [productId]);
 
-  // console.log(options);
-
-  const handleCreateProduct = () => {
+  const handleUpdateProduct = () => {
+   
     if (!title) {
       alert("Tiêu đề không được để trống");
       return;
@@ -43,13 +55,11 @@ function ProductAdminCreate() {
       categoryId: categoryId,
     };
     console.log(newProduct);
-    createProduct(newProduct)
+    updateProduct({productId,...newProduct})
       .unwrap()
-      .then(() => alert("Tạo thành công"))
+      .then(() => alert("Cập Nhập thành công"))
       .catch((err) => console.log(err));
 
-    // Dispatch event để tạo todo
-    // dispatch(createProduct());
     setTitle("");
   };
 
@@ -63,12 +73,12 @@ function ProductAdminCreate() {
         <div className="mb-4">
           <button
             className="btn-custom btn-create-course"
-            onClick={handleCreateProduct}
+            onClick={()=>handleUpdateProduct()}
           >
             <span>
               <i className="fa-solid fa-plus"></i>
             </span>
-            Tạo
+            Update
           </button>
           <Link to={"/admin/products"} className="btn-custom btn-refresh">
             <span>
@@ -98,7 +108,7 @@ function ProductAdminCreate() {
                   ImageUrl
                 </label>
                 <input
-                  type="email"
+                  type="imageUrl"
                   className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="https://"
@@ -143,7 +153,7 @@ function ProductAdminCreate() {
                   className="form-control"
                   id="course-description"
                   rows="5"
-                  value={price}
+                  value={product.price}
                   onChange={(e) => setPrice(e.target.value)}
                 ></input>
               </div>
@@ -173,4 +183,4 @@ function ProductAdminCreate() {
   );
 }
 
-export default ProductAdminCreate;
+export default ProductAdminDetail;
