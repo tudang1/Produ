@@ -55,7 +55,14 @@ function ProductAdminDetail() {
       categoryId: categoryId,
     };
     console.log(newProduct);
-    updateProduct({productId,...newProduct})
+    updateProduct({
+      id: productId,
+      title: title,
+      description: description,
+      price: price,
+      imageUrl: imageUrl,
+      categoryId: categoryId,
+    })
       .unwrap()
       .then(() => alert("Cập Nhập thành công"))
       .catch((err) => console.log(err));

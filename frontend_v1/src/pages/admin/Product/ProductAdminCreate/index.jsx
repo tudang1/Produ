@@ -27,7 +27,7 @@ function ProductAdminCreate() {
     };
   });
 
-  // console.log(options);
+  // console.log(categoryId);
 
   const handleCreateProduct = () => {
     if (!title) {

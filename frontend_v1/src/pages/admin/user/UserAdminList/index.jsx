@@ -6,6 +6,7 @@ import { useCreateUserMutation, useDeleteUserMutation, useGetUsersQuery, useUpda
 function UserAdminList() {
   const {users} = useSelector((state) => state.users);
 
+  const {isLoading} = useGetUsersQuery();
   const [createUser] = useCreateUserMutation();
   const [updateUser] = useUpdateUserMutation();
   const [deleteUser] = useDeleteUserMutation();
@@ -16,6 +17,9 @@ function UserAdminList() {
   
   const handleDeleteUser = (id) =>{
 
+  }
+  if (isLoading) {
+    return <h3>Loading ...</h3>;
   }
   
   return (

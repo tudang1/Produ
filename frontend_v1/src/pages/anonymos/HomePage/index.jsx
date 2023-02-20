@@ -35,7 +35,7 @@ function Home() {
           skipEmptyString: true,
         }); // category=sylas&name=abc
         const res = await productsApi.getProducts(query);
-        console.log(res.data);
+  
         setProducts(res.data);
       } catch (error) {
         console.log(error);
