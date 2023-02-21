@@ -21,19 +21,19 @@ function BestSeller() {
       try {
         const res1 = await productsApi.getProductById(1);
         setProduct1(res1.data);
-        setImage1(res1.data.image.imageUrl);
+        setImage1(res1.data.thumbnail);
 
         const res2 = await productsApi.getProductById(2);
         setProduct2(res2.data);
-        setImage2(res2.data.image.imageUrl);
+        setImage2(res2.data.thumbnail);
 
         const res3 = await productsApi.getProductById(3);
         setProduct3(res3.data);
-        setImage3(res3.data.image.imageUrl);
+        setImage3(res3.data.thumbnail);
 
         const res6 = await productsApi.getProductById(6);
         setProduct6(res6.data);
-        setImage6(res6.data.image.imageUrl);
+        setImage6(res6.data.thumbnail);
       } catch (e) {
         console.log(e);
       }

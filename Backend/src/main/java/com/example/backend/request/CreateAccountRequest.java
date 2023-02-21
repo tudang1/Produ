@@ -11,12 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UpsertAccount {
+public class CreateAccountRequest {
     private String name;
-
+    private String email;
     private String phone;
-
     private String address;
-
+    private String password;
     private List<String> roles;
 }

@@ -7,17 +7,18 @@ function UserAdminList() {
   const {users} = useSelector((state) => state.users);
 
   const {isLoading} = useGetUsersQuery();
-  const [createUser] = useCreateUserMutation();
-  const [updateUser] = useUpdateUserMutation();
   const [deleteUser] = useDeleteUserMutation();
 
-  const handleEditUser = (id) =>{
-
-  }
-  
   const handleDeleteUser = (id) =>{
+    const isConfirm = window.confirm("Bạn có muốn xóa không ?");
+    if (isConfirm) {
+        deleteUser(id)
+            .unwrap()
+            .then(()=> alert("Xóa Thành Công"))
+            .catch((err)=>console.log(err));
+    }
+  };
 
-  }
   if (isLoading) {
     return <h3>Loading ...</h3>;
   }
@@ -60,11 +61,8 @@ function UserAdminList() {
                             <td>
                                 <button
                                     className="btn btn-info"
-                                    onClick={() =>
-                                        handleEditUser(user.id)
-                                    }
                                 >
-                                    Edit
+                                   <Link to={`/admin/users/${user.id}`}>Edit</Link>
                                 </button>
                                 <button className="btn btn-danger"
                                         onClick={() =>

@@ -159,12 +159,27 @@ function ProductAdminCreate() {
                 >
                   <option hidden>Select...</option>
                   {categories.map((p) => (
-                    <option value={p.id} key={p.id} label= {p.name}>
+                    <option value={p.id} key={p.id} label={p.name}>
                       {p.name}
                     </option>
                   ))}
                 </select>
               </div>
+              {/* <div className="mb-3">
+                <label className="form-label fw-bold">Thumnail</label>
+                <div className="course-logo-preview mb-3 rounded">
+                  <img
+                    id="course-logo-preview"
+                    className="rounded"
+                    src={
+                      product?.thumbnail ?? "https://via.placeholder.com/150"
+                    }
+                  />
+                </div>
+                <label htmlFor="course-logo-input" className="btn btn-warning" />
+                Đổi ảnh
+                <input type="file" id="course-logo-input" className="d-none" />
+              </div> */}
             </div>
           </div>
         </div>

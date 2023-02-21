@@ -5,6 +5,10 @@ export const userService = baseApi.injectEndpoints({
         getUsers: builder.query({
             query: () => "/users"
         }),
+        getUserById:builder.query({
+            query: (id) => `/users/${id}`,
+          
+        }),
         deleteUser: builder.mutation({
             query: (id) => ({
                 url: `/users/${id}`,
@@ -28,6 +32,21 @@ export const userService = baseApi.injectEndpoints({
                 body: data
             })
         }),
+        uploadAvatar: builder.mutation({
+            query: ({ id, file }) => ({
+                url:  `/users/${id}/update-avatar`,
+                method: "POST",
+                body: file
+            }),
+            transformResponse: (response, meta, arg) => {
+                console.log({response, meta, arg})
+                return {
+                    id : arg.id,
+                    avatar : response.avatar
+                }
+            }
+
+        }),
     })
 })
 
@@ -35,5 +54,7 @@ export const {
     useCreateUserMutation,
     useDeleteUserMutation,
     useGetUsersQuery,
-    useUpdateUserMutation
+    useUpdateUserMutation,
+    useUploadAvatarMutation,
+    useGetUserByIdQuery,
 } = userService

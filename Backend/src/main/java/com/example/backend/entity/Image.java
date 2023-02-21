@@ -26,6 +26,14 @@ public class Image {
     @Column(name = "imageUrl")
     private String imageUrl;
 
+    @Lob        //Large Object
+    @Column(name = "data")
+    private byte[] data;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
     @PrePersist
     public void prePersist() {
         uploadedAt = LocalDateTime.now();

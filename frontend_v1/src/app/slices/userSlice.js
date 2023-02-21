@@ -13,6 +13,10 @@ const userSlice = createSlice({
         builder.addMatcher(userService.endpoints.getUsers.matchFulfilled, (state, action) => {
             state.users = action.payload;
         })
+        builder.addMatcher(userService.endpoints.getUserById.matchFulfilled, (state, action) => {
+            // console.log(action.payload);
+            state.users = action.payload;
+        })
         builder.addMatcher(userService.endpoints.createUser.matchFulfilled, (state, action) => {
             state.users.push(action.payload);
         })
@@ -23,6 +27,10 @@ const userSlice = createSlice({
         builder.addMatcher(userService.endpoints.deleteUser.matchFulfilled, (state, action) => {
             let index = state.users.findIndex(user => user.id === action.payload);
             state.users.splice(index, 1);
+        })
+        builder.addMatcher(userService.endpoints.uploadAvatar.matchFulfilled, (state, action)=> {
+            let index = state.users.findIndex(user => user.id === action.payload.id);
+            state.users[index].avatar = action.payload.avatar;
         })
     }
 });

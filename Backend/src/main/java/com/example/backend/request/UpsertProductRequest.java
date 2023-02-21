@@ -20,7 +20,7 @@ public class UpsertProductRequest {
 
     private String description;
 
-    private String imageUrl;
+    private String thumbnail;
 
     private Integer categoryId;
 

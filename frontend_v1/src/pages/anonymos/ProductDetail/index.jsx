@@ -15,14 +15,14 @@ function ProductDetail() {
         const res = await productsApi.getProductById(productId);
         setProduct(res.data);
         setCategory(res.data.category.name);
-        setImage(res.data.image.imageUrl);
+        setImage(res.data.thumbnail);
       } catch (e) {
         console.log(e);
       }
     };
     fetchProduct();
   }, []);
-  //   console.log(product.image.imageUrl);
+  //   console.log(product.thumbnail);
   return (
     <div className="course-container mt-6">
       <div className="mt-1 mx-5 ">

@@ -3,9 +3,12 @@ package com.example.backend.controller;
 import com.example.backend.entity.Product;
 import com.example.backend.repository.ProductRepository;
 import com.example.backend.request.UpsertProductRequest;
+import com.example.backend.service.ImageService;
 import com.example.backend.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,6 +17,9 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ImageService imageService;
 
     //gọi tất cả
     @GetMapping("/products")
@@ -44,5 +50,13 @@ public class ProductController {
     public void deleteProduct(@PathVariable Integer id){
         productService.deleteProductById(id);
     }
+
+    // Upload thumbnail
+    @PostMapping("/products/{id}/update-thumbnail")
+    public ResponseEntity<?> uploadThumbnail(@PathVariable Integer id, @ModelAttribute("file") MultipartFile file) {
+        String path = productService.uploadThumbnail(id, file);
+        return ResponseEntity.ok(path);
+    }
+
 
 }

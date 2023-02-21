@@ -48,17 +48,19 @@ public class InitDataTest {
                 .phone("9999")
                 .address("Hà Nội")
                 .active(true)
+                .avatar("https://upload.wikimedia.org/wikipedia/en/8/8c/Captain_America_%28Steve_Rogers%29.png")
                 .password(passwordEncoder.encode("111"))
                 .roles(List.of("ADMIN"))
                 .build();
         accountRepository.save(adminAcc);
 
-        // Tạo user bình thường
+        // Tạo user Nguoi dung
         Account userAcc1 = Account.builder()
                 .name("USER1")
                 .email("user1@exemple.com")
                 .phone("8888")
                 .address("Thái Bình")
+                .avatar("https://kenh14cdn.com/thumb_w/660/2018/5/16/photo-4-15264888122402032180945.jpg")
                 .active(true)
                 .password(passwordEncoder.encode("111"))
                 .roles(List.of("USER"))
@@ -70,6 +72,7 @@ public class InitDataTest {
                 .email("user2@exemple.com")
                 .phone("7777")
                 .address("Hải Dương")
+                .avatar("https://boxofficevietnam.com/wp-content/uploads/2020/09/rsz_chkm8_001a_fpo.jpg")
                 .active(true)
                 .password(passwordEncoder.encode("111"))
                 .roles(List.of("USER"))
@@ -167,7 +170,7 @@ public class InitDataTest {
                         "\n" +
                         "Between the riff of a guitar and the trail of this new Elixir, it's naturally a matter of notes...")
                 .category(categories.get(2))
-                .image(images.get(0))
+                .thumbnail(images.get(0).getImageUrl())
                 .build();
         productRepository.save(diorSauvage);
 
@@ -182,7 +185,7 @@ public class InitDataTest {
                         "\n" +
                         "Dior Homme Eau de Toilette is a fragrance with a bold trail that leaves a sensual imprint.")
                 .category(categories.get(2))
-                .image(images.get(1))
+                .thumbnail(images.get(1).getImageUrl())
                 .build();
         productRepository.save(diorHomme);
 
@@ -191,7 +194,7 @@ public class InitDataTest {
                 .price(14000)
                 .description("Fahrenheit Parfum invents a power of attraction. An immediately addictive trail that highlights the harmony of extraordinary olfactory accords. A scented script that blends extremes, where flower meets leather and woods. The legendary signature of the Fahrenheit fragrance is wrapped in a vibrant, sensual accord with accents of Violet and Leather, enhanced by Bourbon Vanilla absolute. The irresistible attraction of a fragrance exalted by rare ingredients.")
                 .category(categories.get(2))
-                .image(images.get(2))
+                .thumbnail(images.get(2).getImageUrl())
                 .build();
         productRepository.save(fahrenheit);
 
@@ -203,7 +206,7 @@ public class InitDataTest {
                         "\n" +
                         "In 1947, Miss Dior was born out of a wild impetus where the pressing desire to re-enchant the lives of women and open up their eyes, once again, to the sparkling colors of love was felt. Following a bleak period, at that time this scent was synonymous with renewed happiness, poetry, and harmony for Christian Dior. Miss Dior intrigues, excites and invites us to marvel at love and all the beauty in the world.")
                 .category(categories.get(3))
-                .image(images.get(3))
+                .thumbnail(images.get(3).getImageUrl())
                 .build();
         productRepository.save(missDior);
 
@@ -214,7 +217,7 @@ public class InitDataTest {
                         "\n" +
                         "The pleasure of a reinvented J'adore bouquet with a strong natural focus: Neroli from Vallauris injects its full freshness into J'adore Parfum d'eau, while sunny notes of jasmine sambac meld with velvety notes of Chinese magnolia. A genuine ode to the white flowers of J'adore in a fresh and spontaneous interpretation.")
                 .category(categories.get(3))
-                .image(images.get(4))
+                .thumbnail(images.get(4).getImageUrl())
                 .build();
         productRepository.save(jadore);
 
@@ -226,7 +229,7 @@ public class InitDataTest {
                         "\n" +
                         "Enriched with a unique lifting formula, Diorshow Iconic perfectly sculpts, stretches and curls lashes with impeccable hold and exceptional definition.")
                 .category(categories.get(1))
-                .image(images.get(5))
+                .thumbnail(images.get(5).getImageUrl())
                 .build();
         productRepository.save(diorshow);
 
@@ -235,7 +238,7 @@ public class InitDataTest {
                 .price(12000)
                 .description("Dior Addict is the Dior shine lipstick designed like a fashion accessory, with a formula now composed of 90%* natural-origin ingredients, housed in an ultra-couture and refillable case.")
                 .category(categories.get(1))
-                .image(images.get(6))
+                .thumbnail(images.get(6).getImageUrl())
                 .build();
         productRepository.save(dioraddict);
 
@@ -245,7 +248,7 @@ public class InitDataTest {
                 .price(12000)
                 .description("As luxurious as a cream and as effective as an oil, La Crème Démaquillante gently cleanses the skin. This creme’s texture transforms into a fine oil that envelops the skin and melts away impurities and the most stubborn makeup. Upon contact with water, it transforms into a silky milk that is rinsed effortlessly, leaving the skin unbelievably smooth, supple and soothed. Also suitable for eyes.")
                 .category(categories.get(0))
-                .image(images.get(7))
+                .thumbnail(images.get(7).getImageUrl())
                 .build();
         productRepository.save(diorPrestige);
 
@@ -254,7 +257,7 @@ public class InitDataTest {
                 .price(12000)
                 .description("This biphase makeup remover delivers 3 powerful actions with each application: it effectively eliminates all types of makeup, even waterproof, and softens and soothes the eye contour while beautifying the lashes.")
                 .category(categories.get(0))
-                .image(images.get(8))
+                .thumbnail(images.get(8).getImageUrl())
                 .build();
         productRepository.save(diorhydra);
 

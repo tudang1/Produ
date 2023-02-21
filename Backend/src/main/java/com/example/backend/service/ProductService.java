@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -25,6 +26,9 @@ public class ProductService {
 
     @Autowired
     private ImageRepository imageRepository;
+
+    @Autowired
+    private ImageService imageService;
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -43,15 +47,15 @@ public class ProductService {
             throw new NotFoundException("Not found category with id = " + request.getCategoryId());
         });
 
-        Image newImage = Image.builder().imageUrl(request.getImageUrl()).build();
-        imageRepository.save(newImage);
+//        Image newImage = Image.builder().imageUrl(request.getImageUrl()).build();
+//        imageRepository.save(newImage);
 
         // Tạo product
         Product product = Product.builder()
                 .title(request.getTitle())
                 .price(request.getPrice())
                 .description(request.getDescription())
-                .image(newImage)
+                .thumbnail(request.getThumbnail())
                 .category(category)
                 .build();
 
@@ -69,14 +73,15 @@ public class ProductService {
             throw new NotFoundException("Not found category with id = " + request.getCategoryId());
         });
 
-        Image newImage = Image.builder().imageUrl(request.getImageUrl()).build();
-        imageRepository.save(newImage);
+//        Image newImage = Image.builder().imageUrl(request.getImageUrl()).build();
+//        imageRepository.save(newImage);
 
         product.setTitle(request.getTitle());
         product.setCategory(category);
         product.setPrice(request.getPrice());
         product.setDescription(request.getDescription());
-        product.setImage(newImage);
+        product.setThumbnail(request.getThumbnail());
+//        product.setImage(newImage);
 
         return productRepository.save(product);
     }
@@ -87,5 +92,33 @@ public class ProductService {
             throw new NotFoundException("Not found product with id = " + id);
         });
         productRepository.delete(product);
+    }
+    //upload thumbnail
+    public String uploadThumbnail(Integer id, MultipartFile file) {
+       Product product = productRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Not found product with id = " + id);
+        });
+
+        String path = imageService.uploadImage(file);
+        product.setThumbnail(path);
+
+        productRepository.save(product);
+
+        return path;
+    }
+
+    // Đọc file
+    public byte[] readThumbnail(Integer id, Integer fileId) {
+        Product product = productRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Not found product with id = " + id);
+        });
+        return imageService.readImage(fileId);
+    }
+    // Xóa file
+    public void deleteThumbnail(Integer id, Integer fileId) {
+        Product product = productRepository.findById(id).orElseThrow(() -> {
+            throw new NotFoundException("Not found product with id = " + id);
+        });
+        imageService.deleteImage(fileId);
     }
 }

@@ -5,6 +5,7 @@ import authReducer from "../slices/authSlice";
 import productReducer from "../slices/productSlice";
 import categoryReducer from "../slices/categorySlice";
 import userReducer from "../slices/userSlice";
+import imageReducer from "../slices/imageSlice";
 
 const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
         products: productReducer,
         categories: categoryReducer,
         users: userReducer,
+        images:imageReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(

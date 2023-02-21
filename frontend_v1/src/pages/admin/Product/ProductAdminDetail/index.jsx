@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Select from "react-select";
-import SimpleMdeReact from "react-simplemde-editor";
+import { toast } from "react-toastify";
 import productsApi from "../../../../app/api/productsApi";
 import { useGetCategoriesQuery } from "../../../../app/services/categoryService";
-import { useCreateProductMutation, useUpdateProductMutation } from "../../../../app/services/productService";
+import { useUploadThumbnailMutation } from "../../../../app/services/imageService";
+import { useUpdateProductMutation } from "../../../../app/services/productService";
 
 function ProductAdminDetail() {
   const navigate = useNavigate();
@@ -14,6 +14,9 @@ function ProductAdminDetail() {
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [categoryId, setCategoryId] = useState([]);
+
+  const [file, setFile] = useState(null);
+  const [uploadThumbnail] = useUploadThumbnailMutation();
 
   const { productId } = useParams();
   const [product,setProduct] = useState([]);
@@ -31,7 +34,7 @@ function ProductAdminDetail() {
         setTitle(res.data.title);
         setPrice(res.data.price);
         setCategoryId(res.data.category.id);
-        setImageUrl(res.data.image.imageUrl);
+        setImageUrl(res.data.thumbnail);
         setDescription(res.data.description);
       } catch (e) {
         console.log(e);
@@ -46,33 +49,51 @@ function ProductAdminDetail() {
       alert("Tiêu đề không được để trống");
       return;
     }
-    //tao product moi
-    let newProduct = {
-      title: title,
-      price: price,
-      description: description,
-      imageUrl: imageUrl,
-      categoryId: categoryId,
-    };
-    console.log(newProduct);
+
     updateProduct({
       id: productId,
       title: title,
       description: description,
       price: price,
-      imageUrl: imageUrl,
+      thumbnail: imageUrl,
       categoryId: categoryId,
     })
       .unwrap()
-      .then(() => alert("Cập Nhập thành công"))
+      .then(() => {
+        alert("Cập Nhập thành công")
+        setTimeout(() => {
+          navigate("/admin/products");
+      }, 1000);
+      })
       .catch((err) => console.log(err));
 
+      
     setTitle("");
   };
 
   if (isLoading) {
     return <h3>Loading ...</h3>;
   }
+ // đổi file
+  const handleOnChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append("file", file);
+    console.log(file);
+    uploadThumbnail({ id: productId, file: formData })
+      .unwrap()
+      .then((res) => {
+        toast.success("Cập nhật ảnh bìa thành công");
+        setTimeout(() => {
+          navigate(`/admin/books`);
+        }, 1500);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="course-list mt-4 mb-4">
@@ -181,6 +202,49 @@ function ProductAdminDetail() {
                     </option>
                   ))}
                 </select>
+              </div>
+              {/* <div className="mb-3">
+                <label className="form-label fw-bold">Thumbnail</label>
+                <div className="course-logo-preview mb-3 rounded">
+                  <img
+                    id="course-logo-preview"
+                    className="rounded"
+                    src={
+                      imageUrl ? `${product?.thumbnail}` :"https://via.placeholder.com/150"
+                    }
+                  />
+                </div>
+                <label htmlFor="course-logo-input" className="btn btn-warning" />
+                Đổi ảnh
+                <input type="file" id="course-logo-input" className="d-none" />
+              </div> */}
+              <div className="mb-3">
+                <label className="form-label">Thumbnail</label>
+                <div className="avatar-preview mb-3 rounded"></div>
+                <form onSubmit={handleSubmit}>
+                  <label htmlFor="avatar" className="form-thumbnail">
+                    <img
+                      src={
+                        imageUrl
+                          ? `${product?.thumbnail}`  
+                          : "https://via.placeholder.com/150"
+                      }
+                      alt="thumbnail"
+                      id="thumbnail-preview"
+
+                      // style={{ width: "150px" }}
+                    />
+                  </label>
+                  <input
+                    type="file"
+                    onChange={handleOnChange}
+                    id="avatar"
+                    className="d-none"
+                  />
+                  <button className="btn btn-success" type="submit">
+                    Xác Nhận
+                  </button>
+                </form>
               </div>
             </div>
           </div>
