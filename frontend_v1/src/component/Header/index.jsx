@@ -1,11 +1,20 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "../../app/slices/authSlice";
 
 function Header() {
   const { auth } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleLogin = () => {
+    if(auth === null){
+      navigate("/login")
+    }else{
+      alert("Bạn Đã Đăng Nhập");
+    }
+  };
 
   const handleLogout = () => {
     dispatch(logout());
@@ -37,10 +46,10 @@ function Header() {
             <div className="col-sm-4 ">
               <div className="navbar-icon align-items-center justify-content-end">
                 <p className="hello mb-0 hide">
-                  Xin chào, <span className="username">{auth.name}</span>
+                  Xin chào, <span className="username" >{auth?.name}</span>
                 </p>
                 <div className="icon fs-4 mx-1">
-                  <Link to={""}>
+                  <Link to={"/user/cart"}>
                     <div className="bag">
                       <i className="fa-solid fa-bag-shopping"></i>
                     </div>
@@ -76,7 +85,7 @@ function Header() {
                         <div className="dropdown-divider"></div>
                         <button
                           className="dropdown-item"
-                          onClick={handleLogout}
+                          onClick={handleLogin}
                         >
                           Đăng Nhập
                         </button>

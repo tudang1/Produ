@@ -1,12 +1,15 @@
 package com.example.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.*;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -50,7 +53,8 @@ public class Account {
     @Column(name = "roles", columnDefinition = "json")
     private List<String> roles;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<OrderItem> orderItems = new LinkedHashSet<>();
+
 }

@@ -15,6 +15,7 @@ import UserAdminList from './pages/admin/user/UserAdminList';
 import Home from './pages/anonymos/HomePage';
 import ProductDetail from './pages/anonymos/ProductDetail';
 import ProductsFindByCategory from './pages/anonymos/ProductsFindByCategory';
+import Cart from './pages/order/Cart';
 
 
 function App() {
@@ -26,6 +27,14 @@ function App() {
           <Route index element={<Home />} />
           <Route path='products' element={<ProductsFindByCategory/>}/>
           <Route path='products/:productId' element={<ProductDetail/>} />
+
+           {/* User  */}
+           <Route path="user">
+            <Route element={<PrivateRoutes/>}>
+            <Route path="cart" element={<Cart />}/>
+            {/* <Route path="history-order" element={<HistoryOrder/>}/> */}
+            </Route>
+          </Route>
         </Route>
 
         {/* Admin */}
@@ -51,7 +60,7 @@ function App() {
           </Route>
         </Route>
 
-        <Route path='/admin/login' element={<Login />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/not-found' element={<NotFound />} />
       </Routes>
     </>

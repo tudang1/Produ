@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,6 +29,9 @@ public class Product {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name = "thumbnail")
+    private String thumbnail;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
@@ -37,9 +42,9 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "image_id")
-    private Image image;
+//    @OneToOne(orphanRemoval = true)
+//    @JoinColumn(name = "image_id")
+//    private Image image;
 
     @PrePersist
     public void prePersist() {

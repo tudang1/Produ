@@ -18,22 +18,13 @@ public class InitDataTest {
     private AccountRepository accountRepository;
 
     @Autowired
-    private CartRepository cartRepository;
-
-    @Autowired
     private CategoryRepository categoryRepository;
 
     @Autowired
     private ImageRepository imageRepository;
 
     @Autowired
-    private OrderMainRepository orderMainRepository;
-
-    @Autowired
     private ProductRepository productRepository;
-
-    @Autowired
-    private ProductInOrderRepository productInOrderRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

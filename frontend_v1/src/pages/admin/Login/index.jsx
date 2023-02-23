@@ -22,7 +22,7 @@ function Login() {
             .unwrap()
             .then(() => {
                 alert("Login thành công");
-                navigate("/admin/products")
+                navigate("/")
             })
             .catch((error) => {
                 console.log(error);
