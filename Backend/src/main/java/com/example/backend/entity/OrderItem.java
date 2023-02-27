@@ -45,9 +45,9 @@ public class OrderItem {
 
     @PreRemove
     public void preRemove() {
-        for (Order order:orders){
-            order.getOrderItems().remove(this);
-        }
+//        for (Order order:orders){
+//            order.getOrderItems().remove(this);
+//        }
         this.setAccount(null);
         this.setProduct(null);
     }

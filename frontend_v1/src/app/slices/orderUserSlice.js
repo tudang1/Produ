@@ -13,8 +13,8 @@ const orderUserSlice = createSlice({
             state.ordersUser = action.payload;
         })
         builder.addMatcher(orderUserService.endpoints.createOrder.matchFulfilled, (state, action) => {
-            // state.orderUsers.push(action.payload);
-            state.ordersUser.splice(0, 0, action.payload);
+            state.ordersUser.push(action.payload);
+            // state.ordersUser.splice(0, 0, action.payload);
         })
     }
 });

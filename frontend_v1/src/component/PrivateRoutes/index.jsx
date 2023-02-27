@@ -9,20 +9,14 @@ function PrivateRoutes() {
 
     // Nếu chưa đăng nhập => quay về trang login
     if (!isAuthenticated) {
-        const confirm = window.confirm("Xin Hãy Đăng Nhập Để Tiếp Tục");
-        if(confirm){
-            return <Navigate to={"/login"} />;
-        }
+        return <Navigate to={"/login"} />;
     }
         
     // Nếu đã đăng nhập, mà không có quyền => 404 notfound, 403 fobidden
     if(!auth.roles.includes("ADMIN")) {
         return <Navigate to={"/not-found"} />;
-    }else{
-        return 
     }
-
-
+    
     return <Outlet />;
 }
 

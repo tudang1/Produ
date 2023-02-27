@@ -14,13 +14,14 @@ const orderItemSlice = createSlice({
             state.orderItems = action.payload;
         })
         builder.addMatcher(orderItemService.endpoints.createOrderItem.matchFulfilled, (state, action) => {
+            
             state.orderItems.push(action.payload);
         })
         builder.addMatcher(orderItemService.endpoints.updateOrderItem.matchFulfilled, (state, action) => {
             let index = state.orderItems.findIndex(orderItem => orderItem.id === action.payload.id);
             state.orderItems[index] = action.payload;
         })
-        builder.addMatcher(orderItemService.endpoints.deleteOrderItem.matchFulfilled, (state, action) => {
+        builder.addMatcher(orderItemService.endpoints.deleteOrderItem.matchFulfilled, (state, action) => { 
             let index = state.orderItems.findIndex(orderItem => orderItem.id === action.payload);
             state.orderItems.splice(index, 1);
         })

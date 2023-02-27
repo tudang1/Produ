@@ -31,4 +31,9 @@ export const orderItemService = baseUserApi.injectEndpoints({
     })
 })
 
-export const { useGetOrderItemsQuery, useCreateOrderItemMutation ,useUpdateOrderItemMutation,useDeleteOrderItemMutation} = orderItemService
+export const { 
+    useGetOrderItemsQuery, 
+    useCreateOrderItemMutation ,
+    useUpdateOrderItemMutation,
+    useDeleteOrderItemMutation
+} = orderItemService

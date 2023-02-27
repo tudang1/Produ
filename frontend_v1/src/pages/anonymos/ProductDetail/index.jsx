@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import productsApi from "../../../app/api/productsApi";
+import { useCreateOrderItemMutation } from "../../../app/services/orderItemService";
 
 function ProductDetail() {
+  const navigate = useNavigate();
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [category, setCategory] = useState([]);
   const [image, setImage] = useState([]);
+  const [createOrderItem] = useCreateOrderItemMutation();
+  const [amount,setAmount] = useState(1);
+  const {auth} = useSelector((state) => state.auth);
 
   //lấy product
   useEffect(() => {
@@ -21,8 +28,26 @@ function ProductDetail() {
       }
     };
     fetchProduct();
-  }, []);
-  //   console.log(product.thumbnail);
+  }, [productId]);
+
+  const handleAddOrderItem = () => {
+    let newOrderItem = {
+      product: product,
+      amount: amount,
+      account: auth,
+    };
+
+    createOrderItem(newOrderItem)
+      .unwrap()
+      .then(() => {
+        alert("Add success...")
+        setTimeout(() => {
+          navigate(-1);
+      }, 1000);
+      })
+      .catch((err) => alert(err.data.message));
+  };
+ 
   return (
     <div className="course-container mt-6">
       <div className="mt-1 mx-5 ">
@@ -82,10 +107,15 @@ function ProductDetail() {
                 id="typeNumber"
                 className="form-control"
                 min="1"
-                
+                value={amount}
+                onChange={(e)=>setAmount(e.target.value)}
               ></input>
               <p></p>
-              <button type="button" className="btn btn-primary btn-block btn-lg">
+              <button 
+                type="button" 
+                className="btn btn-primary btn-block btn-lg"
+                onClick={handleAddOrderItem}
+              >
                 Add To Cart
               </button>
               <button

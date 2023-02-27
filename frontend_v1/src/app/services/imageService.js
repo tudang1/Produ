@@ -34,7 +34,7 @@ export const imageService = baseApi.injectEndpoints({
 })
 
 export const { 
-    useGetImagesQuery,
+    useGetImageQuery,
     useDeleteImageMutation,
     useUploadThumbnailMutation
 } = imageService

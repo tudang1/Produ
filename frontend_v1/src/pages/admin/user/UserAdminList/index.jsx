@@ -26,7 +26,7 @@ function UserAdminList() {
   return (
     <div className="course-list mt-4 mb-4">
     <div className="container">
-    <div className="mb-4">
+    <div className="mb-4 btn btn-outline-secondary">
                     <Link
                         to={"/admin/users/create"}
                         className="btn-custom btn-create-course"

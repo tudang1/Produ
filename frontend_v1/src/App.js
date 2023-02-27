@@ -4,6 +4,7 @@ import LayoutAdmin from './component/LayoutAdmin';
 import LayoutAnonymous from './component/LayoutAnonymous';
 import NotFound from './component/NotFound';
 import PrivateRoutes from './component/PrivateRoutes';
+import PrivateUserRoutes from './component/PrivateUserRoutes';
 import CategoryAdminList from './pages/admin/Category/CategoryAdminList';
 import Login from './pages/admin/Login';
 import ProductAdminCreate from './pages/admin/Product/ProductAdminCreate';
@@ -30,7 +31,7 @@ function App() {
 
            {/* User  */}
            <Route path="user">
-            <Route element={<PrivateRoutes/>}>
+            <Route element={<PrivateUserRoutes/>}>
             <Route path="cart" element={<Cart />}/>
             {/* <Route path="history-order" element={<HistoryOrder/>}/> */}
             </Route>

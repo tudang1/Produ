@@ -1,9 +1,6 @@
 package com.example.backend;
 
-import com.example.backend.entity.Account;
-import com.example.backend.entity.Category;
-import com.example.backend.entity.Image;
-import com.example.backend.entity.Product;
+import com.example.backend.entity.*;
 import com.example.backend.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,9 @@ public class InitDataTest {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     // Tạo Account
     @Test
@@ -252,6 +252,6 @@ public class InitDataTest {
                 .build();
         productRepository.save(diorhydra);
 
-
     }
+
 }

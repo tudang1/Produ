@@ -20,7 +20,6 @@ function Cart() {
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
 
-
   useEffect(() => {
     const fetchProvinces = async () => {
       try {
@@ -39,7 +38,7 @@ function Cart() {
       let res = await axios.get(
         `https://provinces.open-api.vn/api/p/${provinceCode}?depth=2`
       );
-      setAddress(res.data.name)
+      setAddress(res.data.name);
       setDistricts(res.data.districts);
       setWards([]);
     } catch (error) {
@@ -52,7 +51,7 @@ function Cart() {
       let res = await axios.get(
         `https://provinces.open-api.vn/api/d/${districtCode}?depth=2`
       );
-      setAddress(address+"-"+res.data.name)
+      setAddress(address + "-" + res.data.name);
       setWards(res.data.wards);
     } catch (error) {
       console.log(error);
@@ -64,9 +63,11 @@ function Cart() {
   }
 
   let sumPrice = 0;
-  for (let i = 0; i < orderItems.length; i++) {
-    sumPrice += orderItems[i].book.price * orderItems[i].amount;
-  }
+
+  const total = orderItems.map((item) => {
+    const price = item.product.price;
+    return (sumPrice += price * item.amount);
+  });
 
   let vat = sumPrice * 0.1;
   let sum = sumPrice + vat;
@@ -95,6 +96,7 @@ function Cart() {
       .then()
       .catch((err) => alert(err));
   };
+
   const handleDelete = (id) => {
     const isDelete = window.confirm("Bạn có muốn xóa không?");
     if (isDelete) {
@@ -102,41 +104,39 @@ function Cart() {
       console.log(orderItems);
     }
   };
-const orderItemIds=orderItems.map((o)=>{
-  return o.id;
-})
+  const orderItemIds = orderItems.map((o) => {
+    return o.id;
+  });
 
-
-const updateAllOrderItems = (id) => {
+  const updateAllOrderItems = (id) => {
     const orderItem = orderItems.find((c) => c.id === id);
-    editOrderItem({id,...orderItem,status:false});
-    }
+    editOrderItem({ id, ...orderItem, status: false });
+  };
 
   const handleAddOrder = () => {
+    const newOrder = {
+      account: auth,
+      orderItemIds: orderItemIds,
+      address: address,
+    };
 
-      const newOrder = {
-        user: auth,
-        orderItemIds: orderItemIds,
-        address: address,
-      };
- 
-        console.log(newOrder)
-        createOrder(newOrder)
-        .unwrap()
-        .then(() =>{ alert("Đặt hàng thành công");
-         updateAllOrderItems(1);
+    console.log(newOrder);
+    createOrder(newOrder)
+      .unwrap()
+      .then(() => {
+        alert("Đặt hàng thành công");
+        updateAllOrderItems(1);
       })
-        .catch((err) => alert(err.data.message));
-      
-  }
+      .catch((err) => alert(err.data.message));
+  };
 
   return (
     <div className="shopping-cart-container mt-5">
       <div className="container">
         <div className="row">
           <div className="col-md-12">
-            <div className="mb-4">
-              <h2>Giỏ hàng</h2>
+            <div className="mb-4 ">
+              <h2 className="d-flex justify-content-center">MyCart</h2>
             </div>
           </div>
         </div>
@@ -156,17 +156,17 @@ const updateAllOrderItems = (id) => {
                     key={orderItem.id}
                     className="product-item d-flex border mb-4"
                   >
-                    <div className="image ">
-                      <img src={orderItem.book.thumbnail} alt="sản phẩm 1" />
+                    <div className="anh">
+                      <img src={orderItem.product.thumbnail} alt="product" />
                     </div>
                     <div className="info d-flex flex-column justify-content-between px-4 py-3 flex-grow-1">
                       <div>
                         <div className="d-flex justify-content-between align-items-center">
                           <h2 className="text-dark fs-5 fw-normal">
-                            {orderItem.book.title}
+                            {orderItem.product.title}
                           </h2>
                           <h2 className="text-danger fs-5 fw-normal">
-                            {orderItem.book.price.toLocaleString("en")}
+                            {orderItem.product.price.toLocaleString("en")}
                           </h2>
                         </div>
                         <div className="text-black-50">
@@ -208,31 +208,31 @@ const updateAllOrderItems = (id) => {
           <div className="col-md-4">
             <div className="bill">
               <div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">
-                <span className="text-black-50">Tạm tính:</span>
+                <span className="text-black-50">Total:</span>
                 <span className="text-primary" id="sub-total-money">
-                  {sumPrice.toLocaleString("en")} VND
+                  $ {sumPrice.toLocaleString("en")}
                 </span>
               </div>
               <div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">
                 <span className="text-black-50">VAT (10%):</span>
                 <span className="text-primary" id="vat-money">
-                  {vat.toLocaleString("en")} VND
+                  $ {vat.toLocaleString("en")}
                 </span>
               </div>
               <div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">
-                <span className="text-black-50">Thành tiền:</span>
+                <span className="text-black-50">SubTotal:</span>
                 <span className="text-primary" id="total-money">
-                  {sum.toLocaleString("en")} VND
+                  $ {sum.toLocaleString("en")}
                 </span>
               </div>
               <label className="col-form-label">Address</label>
 
               <select
                 id="province"
-                className="form-select mb-3" 
+                className="form-select mb-3"
                 onChange={(e) => fetchDistricts(e.target.value)}
               >
-                <option hidden>-- Chọn tỉnh/thành phố</option>
+                <option hidden>-- Districts</option>
                 {provinces.map((p) => (
                   <option value={p.code} key={p.code}>
                     {p.name}
@@ -245,7 +245,7 @@ const updateAllOrderItems = (id) => {
                 id="district"
                 onChange={(e) => fetchWards(e.target.value)}
               >
-                <option hidden>-- Chọn quận/huyện</option>
+                <option hidden>-- Wards</option>
                 {districts.map((p) => (
                   <option value={p.code} key={p.code}>
                     {p.name}
@@ -253,18 +253,23 @@ const updateAllOrderItems = (id) => {
                 ))}
               </select>
 
-              <select 
-              className="form-select mb-3" id="commune"
-              onChange={(e)=>setAddress(address+"-"+e.target.value)}>
-                <option hidden>-- Chọn xã/phường</option>
+              <select
+                className="form-select mb-3"
+                id="commune"
+                onChange={(e) => setAddress(address + "-" + e.target.value)}
+              >
+                <option hidden>-- Address</option>
                 {wards.map((p) => (
                   <option value={p.name} key={p.code}>
                     {p.name}
                   </option>
                 ))}
               </select>
-              <button  onClick={handleAddOrder} className="tm-btn tm-btn-blue ">
-                Đặt hàng
+              <button
+                onClick={handleAddOrder}
+                className="btn btn-outline-secondary "
+              >
+                Order
               </button>
             </div>
           </div>

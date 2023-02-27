@@ -20,10 +20,6 @@ public class Order {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
-
     @Column(name = "status")
     private Boolean status;
 

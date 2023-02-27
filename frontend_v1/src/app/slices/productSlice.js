@@ -18,6 +18,7 @@ const productSlice = createSlice({
         state.products.splice(index, 1);
     })
     builder.addMatcher(productService.endpoints.createProduct.matchFulfilled, (state, action) => {
+        console.log(action.payload);
         state.products.push(action.payload);
     })
     builder.addMatcher(productService.endpoints.updateProduct.matchFulfilled, (state,action) =>{

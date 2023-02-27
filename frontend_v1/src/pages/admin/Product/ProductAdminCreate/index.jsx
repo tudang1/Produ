@@ -62,7 +62,7 @@ function ProductAdminCreate() {
       <div className="container">
         <div className="mb-4">
           <button
-            className="btn-custom btn-create-course"
+            className="btn btn-outline-secondary"
             onClick={handleCreateProduct}
           >
             <span>

@@ -30,7 +30,7 @@ function ProductAdminList() {
     <div className="container">
       <div className="course-list mt-4 mb-4">
         <div>
-          <div className="mb-4">
+          <div className="mb-4 btn btn-outline-secondary">
             <Link
               to={"/admin/products/create"}
               className="btn-custom btn-create-course"

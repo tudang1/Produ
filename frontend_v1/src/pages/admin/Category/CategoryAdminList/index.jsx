@@ -72,9 +72,9 @@ function CategoryAdminList() {
     return (
         <div className="course-list mt-4 mb-4">
             <div className="container">
-                <div className="mb-4">
+                <div className="mb-4 ">
                     <button
-                        className="btn-custom btn-create-course"
+                        className="btn btn-outline-secondary"
                         onClick={handleAddCategory}
                     >
                         Tạo category
