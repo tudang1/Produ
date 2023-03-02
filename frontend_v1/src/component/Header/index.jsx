@@ -19,6 +19,14 @@ function Header() {
   const handleLogout = () => {
     dispatch(logout());
   };
+
+  const handleHistoryOrder = () => {
+    if(auth === null){
+      navigate("/login")
+    }else{
+      navigate("user/history-order")
+    }
+  };
   return (
     <div id="header">
       <div className="container ">
@@ -97,7 +105,7 @@ function Header() {
                         </button>
                         <button
                           className="dropdown-item"
-                          onClick={handleLogout}
+                          onClick={handleHistoryOrder}
                         >
                           Lịch Sử Mua Hàng
                         </button>

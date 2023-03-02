@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.entity.OrderItem;
+import com.example.backend.exception.BadRequestException;
 import com.example.backend.exception.NotFoundException;
 import com.example.backend.repository.OrderItemRepository;
 import com.example.backend.request.UpsertOrderItemRequest;
@@ -19,6 +20,10 @@ public class OrderItemService {
     }
 
     public OrderItem createOrderItem(UpsertOrderItemRequest request) {
+        if (orderItemRepository.findByProduct_Id(request.getProduct().getId()).isPresent()){
+            throw new BadRequestException("id Product = ");
+        }
+
         OrderItem newOrderItem=new OrderItem();
         newOrderItem.setProduct(request.getProduct());
         newOrderItem.setAmount(request.getAmount());

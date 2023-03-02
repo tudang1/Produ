@@ -9,11 +9,10 @@ function PrivateUserRoutes() {
 
     // Nếu chưa đăng nhập => quay về trang login
     if (!isAuthenticated) {
-        const confirm = window.confirm("Xin Hãy Đăng Nhập Để Tiếp Tục");
-        if(confirm){
-            return <Navigate to={"/login"} />;
-        }
+        toast.error("Bạn cần đăng nhập để tiếp tục")
+        return <Navigate to={"/login"} />;
     }
+
 
     return <Outlet />;
 }

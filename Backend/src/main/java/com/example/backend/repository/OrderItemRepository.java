@@ -4,6 +4,7 @@ import com.example.backend.entity.OrderItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
@@ -11,4 +12,7 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
 
 
     Set<OrderItem> findByIdIn(List<Integer> orderItemIds);
+
+    Optional<OrderItem> findByProduct_Id(Integer id);
+
 }

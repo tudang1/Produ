@@ -7,8 +7,10 @@ import {
 } from "../../../app/services/orderItemService";
 import axios from "axios";
 import { useCreateOrderMutation } from "../../../app/services/orderUserService";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  const navigate = useNavigate();
   const { auth } = useSelector((state) => state.auth);
   const { isLoading } = useGetOrderItemsQuery(auth.id);
   const { orderItems } = useSelector((state) => state.orderItems);
@@ -70,7 +72,7 @@ function Cart() {
   });
 
   let vat = sumPrice * 0.1;
-  let sum = sumPrice + vat;
+  let subTotal = sumPrice + vat;
 
   const tru = (id) => {
     const orderItem = orderItems.find((c) => c.id === id);
@@ -97,6 +99,7 @@ function Cart() {
       .catch((err) => alert(err));
   };
 
+  //xóa item
   const handleDelete = (id) => {
     const isDelete = window.confirm("Bạn có muốn xóa không?");
     if (isDelete) {
@@ -108,11 +111,13 @@ function Cart() {
     return o.id;
   });
 
+  //sau khi order xog thì xóa cartItem
   const updateAllOrderItems = (id) => {
     const orderItem = orderItems.find((c) => c.id === id);
     editOrderItem({ id, ...orderItem, status: false });
   };
 
+  //order
   const handleAddOrder = () => {
     const newOrder = {
       account: auth,
@@ -120,12 +125,14 @@ function Cart() {
       address: address,
     };
 
-    console.log(newOrder);
     createOrder(newOrder)
       .unwrap()
       .then(() => {
         alert("Đặt hàng thành công");
         updateAllOrderItems(1);
+        setTimeout(() => {
+          navigate("/user/history-order")
+        }, 500);
       })
       .catch((err) => alert(err.data.message));
   };
@@ -222,7 +229,7 @@ function Cart() {
               <div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">
                 <span className="text-black-50">SubTotal:</span>
                 <span className="text-primary" id="total-money">
-                  $ {sum.toLocaleString("en")}
+                  $ {subTotal.toLocaleString("en")}
                 </span>
               </div>
               <label className="col-form-label">Address</label>

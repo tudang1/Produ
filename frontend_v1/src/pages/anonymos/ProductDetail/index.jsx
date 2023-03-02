@@ -12,8 +12,9 @@ function ProductDetail() {
   const [category, setCategory] = useState([]);
   const [image, setImage] = useState([]);
   const [createOrderItem] = useCreateOrderItemMutation();
-  const [amount,setAmount] = useState(1);
-  const {auth} = useSelector((state) => state.auth);
+  const [amount, setAmount] = useState(1);
+  const { auth } = useSelector((state) => state.auth);
+  const { orderItems } = useSelector((state) => state.orderItems);
 
   //lấy product
   useEffect(() => {
@@ -30,24 +31,38 @@ function ProductDetail() {
     fetchProduct();
   }, [productId]);
 
+  let u = false;
   const handleAddOrderItem = () => {
-    let newOrderItem = {
-      product: product,
-      amount: amount,
-      account: auth,
-    };
+    orderItems.map((item) => {
+      if (item.product.id == productId) {
+        u = true;
+        return;
+      }
+    });
 
-    createOrderItem(newOrderItem)
-      .unwrap()
-      .then(() => {
-        alert("Add success...")
-        setTimeout(() => {
-          navigate(-1);
+    if (u) {
+      alert("Sản Phẩm Đã Được Thêm Trước...");
+      setTimeout(() => {
+        navigate("/user/cart");
       }, 1000);
-      })
-      .catch((err) => alert(err.data.message));
+    } else {
+      let newOrderItem = {
+        product: product,
+        amount: amount,
+        account: auth,
+      };
+      createOrderItem(newOrderItem)
+        .unwrap()
+        .then(() => {
+          alert("Add success...");
+          setTimeout(() => {
+            navigate(-1);
+          }, 1000);
+        })
+        .catch((err) => alert(err.data.message));
+    }
   };
- 
+
   return (
     <div className="course-container mt-6">
       <div className="mt-1 mx-5 ">
@@ -108,11 +123,11 @@ function ProductDetail() {
                 className="form-control"
                 min="1"
                 value={amount}
-                onChange={(e)=>setAmount(e.target.value)}
+                onChange={(e) => setAmount(e.target.value)}
               ></input>
               <p></p>
-              <button 
-                type="button" 
+              <button
+                type="button"
                 className="btn btn-primary btn-block btn-lg"
                 onClick={handleAddOrderItem}
               >

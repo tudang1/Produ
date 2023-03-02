@@ -17,6 +17,7 @@ import Home from './pages/anonymos/HomePage';
 import ProductDetail from './pages/anonymos/ProductDetail';
 import ProductsFindByCategory from './pages/anonymos/ProductsFindByCategory';
 import Cart from './pages/order/Cart';
+import HistoryOrder from './pages/order/HistoryOrder';
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
            <Route path="user">
             <Route element={<PrivateUserRoutes/>}>
             <Route path="cart" element={<Cart />}/>
-            {/* <Route path="history-order" element={<HistoryOrder/>}/> */}
+            <Route path="history-order" element={<HistoryOrder/>}/>
             </Route>
           </Route>
         </Route>

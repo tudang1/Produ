@@ -25,9 +25,10 @@ public class WebController {
 //        return webService.getProductsByCategory(category);
 //    }
 
-    //tim kiếm product theo category
+    //tim kiếm product theo category va product Name
     @GetMapping("/products")
-    public List<Product> getProductsByCategory(@RequestParam(required = false) String category){
+    public List<Product> getProductsByCategory(@RequestParam(required = false) String category,
+                                               @RequestParam(required = false) String search){
         return webService.getProductsByCategory(category);
     }
 
