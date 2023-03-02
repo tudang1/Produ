@@ -39,9 +39,13 @@ public class WebService {
 //        log.info("category {}", category);
 //        return productRepository.findByTitleContainsIgnoreCaseAndCategories_NameIgnoreCaseOrderByPublishedAtDesc(search, category);
 //    }
-    public List<Product> getProductsByCategory(String category) {
+
+    //search and loc
+    public List<Product> getProductsByCategory(String search,String category) {
+        log.info("search {}",search);
         log.info("category {}", category);
-        return productRepository.findByCategory_NameEquals(category);
+//        return productRepository.findByCategory_NameEquals(category);
+        return productRepository.findByTitleContainsIgnoreCaseAndCategory_NameEquals(search,category);
     }
 
     public List<Product> getProductsByCategoryAndId(String category, Integer id) {

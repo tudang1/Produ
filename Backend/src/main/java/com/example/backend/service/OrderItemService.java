@@ -20,10 +20,6 @@ public class OrderItemService {
     }
 
     public OrderItem createOrderItem(UpsertOrderItemRequest request) {
-        if (orderItemRepository.findByProduct_Id(request.getProduct().getId()).isPresent()){
-            throw new BadRequestException("id Product = ");
-        }
-
         OrderItem newOrderItem=new OrderItem();
         newOrderItem.setProduct(request.getProduct());
         newOrderItem.setAmount(request.getAmount());

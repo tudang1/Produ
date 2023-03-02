@@ -1,17 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../app/slices/authSlice";
+import queryString from "query-string";
+import productsApi from "../../app/api/productsApi";
 
 function Header() {
   const { auth } = useSelector((state) => state.auth);
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [term, setTerm] = useState("");
+  const [products,setProducts] = useState([]);
+
+  //search product
+  // Khởi tạo state ban đầu dựa trên url hiện tại
+  const [filter, setFilter] = useState(() => {
+    const params = queryString.parse(location.search);
+    return {
+      search: params.search || "",
+    };
+  });
+
+  // Khi url thay đổi => parse lại url => lưu vào state
+  useEffect(() => {
+    const params = queryString.parse(location.search);
+    setFilter({
+      search: params.search || "",
+    });
+  }, [location.search]);
+
+  //lọc theo search
+  const handleSearch = () => {
+    const params = { ...filter, search: term};
+    navigate({
+      pathname: location.pathname, // http://localhost:3000
+      search: queryString.stringify(params, {
+        // category=sylas&name=abc
+        skipEmptyString: true,
+      }),
+    });
+  };
 
   const handleLogin = () => {
-    if(auth === null){
-      navigate("/login")
-    }else{
+    if (auth === null) {
+      navigate("/login");
+    } else {
       alert("Bạn Đã Đăng Nhập");
     }
   };
@@ -21,10 +55,10 @@ function Header() {
   };
 
   const handleHistoryOrder = () => {
-    if(auth === null){
-      navigate("/login")
-    }else{
-      navigate("user/history-order")
+    if (auth === null) {
+      navigate("/login");
+    } else {
+      navigate("user/history-order");
     }
   };
   return (
@@ -39,6 +73,13 @@ function Header() {
                   type="text"
                   placeholder="Tìm kiếm sản phẩm"
                   className="form-control border-0 seach-form-input"
+                  value={term}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch();
+                    }
+                  }}
+                  onChange={(e) => setTerm(e.target.value)}
                 />
                 {/* <!-- Nút tìm kiếm sản phẩm --> */}
                 <span className="text-black-50 seach-form-button ps-2">
@@ -54,7 +95,7 @@ function Header() {
             <div className="col-sm-4 ">
               <div className="navbar-icon align-items-center justify-content-end">
                 <p className="hello mb-0 hide">
-                  Xin chào, <span className="username" >{auth?.name}</span>
+                  Xin chào, <span className="username">{auth?.name}</span>
                 </p>
                 <div className="icon fs-4 mx-1">
                   <Link to={"/user/cart"}>
@@ -91,10 +132,7 @@ function Header() {
                         aria-labelledby="navbarDropdown"
                       >
                         <div className="dropdown-divider"></div>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleLogin}
-                        >
+                        <button className="dropdown-item" onClick={handleLogin}>
                           Đăng Nhập
                         </button>
                         <button

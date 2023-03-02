@@ -3136,6 +3136,10 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 
 .anh {
     width: 200px;
-    height: max-content;
-    object-fit: cover;
+    height: 120px;
+    object-position: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

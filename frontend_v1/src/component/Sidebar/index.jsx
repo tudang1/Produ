@@ -4,39 +4,37 @@ import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import categoryApi from "../../app/api/categoryApi";
 
 function Sidebar() {
-   const location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
 
-  // Khởi tạo state ban đầu dựa trên url hiện tại
-    const [filter, setFilter] = useState(() => {
-      const params = queryString.parse(location.search);
-      return {
-          category: params.category || "",
-      };
-  });
+  // // Khởi tạo state ban đầu dựa trên url hiện tại
+  // const [filter, setFilter] = useState(() => {
+  //   const params = queryString.parse(location.search);
+  //   return {
+  //     category: params.category || "",
+  //   };
+  // });
 
-  // Khi url thay đổi => parse lại url => lưu vào state
-  useEffect(() => {
-    const params = queryString.parse(location.search);
-    setFilter({
-        category: params.category || "",
-    });
-}, [location.search]);
+  // // Khi url thay đổi => parse lại url => lưu vào state
+  // useEffect(() => {
+  //   const params = queryString.parse(location.search);
+  //   setFilter({
+  //     category: params.category || "",
+  //   });
+  // }, [location.search]);
 
   // Lấy danh sách category
   useEffect(() => {
     const fetchCategoies = async () => {
       try {
         let res = await categoryApi.getCategories();
-        // console.log(res);
         setCategories(res.data);
       } catch (error) {
         console.log(error);
       }
     };
-
     fetchCategoies();
   }, []);
 
@@ -45,7 +43,10 @@ function Sidebar() {
       {/* <!-- Sidebar --> */}
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-          <div className="collapse navbar-collapse d-flex justify-content-center" id="navbarNavDropdown">
+          <div
+            className="collapse navbar-collapse d-flex justify-content-center"
+            id="navbarNavDropdown"
+          >
             <ul className="navbar-nav ">
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to={"/"}>
@@ -55,7 +56,8 @@ function Sidebar() {
               {categories.map((category) => (
                 <li className="nav-item" key={category.id}>
                   <Link
-                    className="nav-link"  to={`/products?category=${category.name}`}
+                    className="nav-link"
+                    to={`/products?category=${category.name}`}
                   >
                     {category.name}
                   </Link>

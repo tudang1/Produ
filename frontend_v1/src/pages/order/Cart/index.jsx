@@ -66,7 +66,7 @@ function Cart() {
 
   let sumPrice = 0;
 
-  const total = orderItems.map((item) => {
+  orderItems.map((item) => {
     const price = item.product.price;
     return (sumPrice += price * item.amount);
   });
@@ -156,12 +156,13 @@ function Cart() {
                 Không có sản phẩm nào trong giỏ hàng
               </p>
             )}
-            <div className="product-list">
+            <div className="product-list col-md-14">
               {orderItems.length > 0 &&
                 orderItems.map((orderItem) => (
                   <div
                     key={orderItem.id}
-                    className="product-item d-flex border mb-4"
+                    className="product-item d-flex border mb-2" 
+                    style={{height: "120px"}}
                   >
                     <div className="anh">
                       <img src={orderItem.product.thumbnail} alt="product" />

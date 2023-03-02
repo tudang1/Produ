@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation} from 'react-router-dom';
 import queryString from "query-string";
 import productsApi from '../../../app/api/productsApi';
 
 function ProductsFindByCategory() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [category,setCategory] = useState([]);
@@ -14,7 +13,8 @@ function ProductsFindByCategory() {
   const [filter, setFilter] = useState(() => {
     const params = queryString.parse(location.search);
     return {
-      category: params.category || "",
+      search: params.search || "",
+      category: params.category || ""
     };
   });
 
@@ -25,12 +25,13 @@ function ProductsFindByCategory() {
     setCategory(params.category);
     
     setFilter({
-      category: params.category || "",
+      search: params.search || "",
+      category: params.category || ""
     });
     
   }, [location.search]);
 
-  // Lấy danh sách bài viết
+  // Lấy danh sách bài viết theo category
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -39,7 +40,6 @@ function ProductsFindByCategory() {
         }); // category=sylas&name=abc
         const res = await productsApi.getProducts(query);
         setProducts(res.data);
-        
       } catch (error) {
         console.log(error);
       }
@@ -54,7 +54,7 @@ function ProductsFindByCategory() {
       <h6 className='text-dark d-flex justify-content-center mb-3'>OUR SELECTION</h6>
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-16">
               <div className="course-list row">
                 {products.length > 0 && 
                   products.map((product) => (
@@ -65,9 +65,9 @@ function ProductsFindByCategory() {
                             <img src={product?.thumbnail} alt={product.title} width={370} height={350}/>
                           </div>
                           <div className="course-item-info p-1">
-                            <h2 className="fs-5 mb-2 text-dark d-flex justify-content-center">
+                            <h6 className="mb-2 text-dark d-flex justify-content-center">
                               {product.title}
-                            </h2>
+                            </h6>
                             <p className="text-black-50 d-flex justify-content-center">
                               $ {product.price}
                             </p>

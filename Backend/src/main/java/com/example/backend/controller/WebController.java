@@ -29,7 +29,7 @@ public class WebController {
     @GetMapping("/products")
     public List<Product> getProductsByCategory(@RequestParam(required = false) String category,
                                                @RequestParam(required = false) String search){
-        return webService.getProductsByCategory(category);
+        return webService.getProductsByCategory(search,category);
     }
 
     //tìm kiếm product theo category
