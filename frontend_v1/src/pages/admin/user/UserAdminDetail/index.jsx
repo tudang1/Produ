@@ -1,36 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-
+import { ToastContainer} from "react-toastify";
 import { useSelector } from "react-redux";
-import { useGetUsersQuery, useUpdateUserMutation, useUploadAvatarMutation } from "../../../../app/services/userService";
+import {
+  useGetUsersQuery,
+  useUpdateUserMutation,
+  useUploadAvatarMutation,
+} from "../../../../app/services/userService";
 
 function UserAdminDetail() {
-  const navigate= useNavigate();
-  // const location=useLocation();
-  // navigate(location.state?.from)
+  const navigate = useNavigate();
   const { userId } = useParams();
-  const { users } = useSelector((state)=>state.users);
+  const { isLoading } = useGetUsersQuery();
+  const { users } = useSelector((state) => state.users);
   // const [oldPassword, setOldPassword] = useState("");
   // const [newPassWord, setNewPassword] = useState("");
-    // const [defaultPassword, setDefaultPassword] = useState("");
-    const { isLoading } = useGetUsersQuery();
-  const [user, setUser] = useState(() =>{
-    return users.find((u)=>u.id===+userId)
-  });
+  // const [defaultPassword, setDefaultPassword] = useState("");
 
-  //tempUser
- const [temp,setTemp] = useState(user);
-//  console.log(temp);
+  const user = users.find((u) => u.id === +userId);
+  const [temp, setTemp] = useState([]);
+  // Xử lý các side effect de mapping 2 chieu
+  useEffect(() => {
+    const fetchTodos = async () => {
+      setTemp(user);
+    };
+
+    fetchTodos();
+  }, [user]);
 
   const [file, setFile] = useState(null);
   const [editUser] = useUpdateUserMutation();
   const [uploadAvatar] = useUploadAvatarMutation();
   const handleOnChange = (e) => {
     setFile(e.target.files[0]);
-    
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,11 +47,10 @@ function UserAdminDetail() {
       .then(() => {
         alert("Tạo thành công");
         setTimeout(() => {
-            navigate(`/admin/users`);
+          navigate(`/admin/users`);
         }, 1500);
-        
       })
-      .catch((err) =>console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const updateUser = () => {
@@ -56,23 +59,20 @@ function UserAdminDetail() {
       return;
     }
 
-    editUser({ 
-      id: temp.id, 
+    editUser({
+      id: temp.id,
       name: temp.name,
       address: temp.address,
       phone: temp.phone,
-
     })
       .unwrap()
       .then(() => {
-        alert("Cập Nhập thành công")
+        alert("Cập Nhập thành công");
         setTimeout(() => {
-            navigate("/admin/users");
+          navigate("/admin/users");
         }, 1500);
-
       })
       .catch((err) => alert(err));
-     
   };
 
   if (isLoading) {
@@ -311,7 +311,7 @@ function UserAdminDetail() {
           </div>
         </div>
       </div> */}
-      <ToastContainer  position="top-center" />
+      <ToastContainer position="top-center" />
     </div>
   );
 }

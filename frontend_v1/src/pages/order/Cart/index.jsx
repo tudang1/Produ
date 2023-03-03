@@ -138,12 +138,12 @@ function Cart() {
   };
 
   return (
-    <div className="shopping-cart-container mt-5">
+    <div className="shopping-cart-container mt-3">
       <div className="container">
         <div className="row">
           <div className="col-md-12">
             <div className="mb-4 ">
-              <h2 className="d-flex justify-content-center">MyCart</h2>
+              <h4 className="d-flex justify-content-center">MyCart</h4>
             </div>
           </div>
         </div>
@@ -170,9 +170,9 @@ function Cart() {
                     <div className="info d-flex flex-column justify-content-between px-4 py-3 flex-grow-1">
                       <div>
                         <div className="d-flex justify-content-between align-items-center">
-                          <h2 className="text-dark fs-5 fw-normal">
+                          <h6 className="text-dark  fw-normal">
                             {orderItem.product.title}
-                          </h2>
+                          </h6>
                           <h2 className="text-danger fs-5 fw-normal">
                             {orderItem.product.price.toLocaleString("en")}
                           </h2>

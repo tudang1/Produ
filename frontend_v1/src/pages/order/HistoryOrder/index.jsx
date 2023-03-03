@@ -1,16 +1,16 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useGetOrderByUseridQuery } from "../../../app/services/orderUserService";
 import { convertDate } from "../../../utils/utils";
+import { useGetOrderByUseridQuery } from "../../../app/services/orderUserService";
 
 function HistoryOrder() {
   const { auth } = useSelector((state) => state.auth);
   const { isLoading } = useGetOrderByUseridQuery(auth.id);
   const { ordersUser } = useSelector((state) => state.ordersUser);
 
-  // if (isLoading) {
-  //   return <h3>Loading ...</h3>;
-  // }
+   if (isLoading) {
+    return <h3>Loading ...</h3>;
+  }
 
   const sum = (order) => {
     let sumPrice = 0;
@@ -26,7 +26,7 @@ function HistoryOrder() {
         <div className="row">
           <div className="col-md-12">
             <div className="mb-2">
-              <h2 className="d-flex justify-content-center">History Order</h2>
+              <h4 className="d-flex justify-content-center">History Order</h4>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@ function HistoryOrder() {
               <div className="row">
                 <div className="col-md-12">
                   <div className="mb-3">
-                    <h2>Order</h2>
+                    <h5>Order</h5>
 
                     <p>Ngày đặt: {convertDate(historyOrder.createAt)}</p>
                     <p>Địa chỉ: {historyOrder.address}</p>

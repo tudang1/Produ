@@ -7,6 +7,8 @@ import PrivateRoutes from './component/PrivateRoutes';
 import PrivateUserRoutes from './component/PrivateUserRoutes';
 import CategoryAdminList from './pages/admin/Category/CategoryAdminList';
 import Login from './pages/admin/Login';
+import OrderDetailAdmin from './pages/admin/Order/OrderDetailAdmin';
+import OrderListAdmin from './pages/admin/Order/OrderListAdmin';
 import ProductAdminCreate from './pages/admin/Product/ProductAdminCreate';
 import ProductAdminDetail from './pages/admin/Product/ProductAdminDetail';
 import ProductAdminList from './pages/admin/Product/ProductAdminList';
@@ -57,6 +59,12 @@ function App() {
               <Route index element={<UserAdminList />} />
               <Route path=':userId' element={<UserAdminDetail />} />
               <Route path='create' element={<UserAdminCreate />} />
+            </Route>
+
+             {/* Order */}
+             <Route path="orders">
+              <Route index element={<OrderListAdmin />} />
+              <Route path=':orderId' element={<OrderDetailAdmin />} />
             </Route>
 
           </Route>

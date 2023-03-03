@@ -146,7 +146,7 @@ function SidebarAdmin() {
               <div className="accordion-body">
                 <ul className="p-0">
                   <li className="my-2">
-                    <Link to={"/admin/users"}>Danh sách Đơn Hàng</Link>
+                    <Link to={"/admin/orders"}>Danh sách Đơn Hàng</Link>
                   </li>
                 </ul>
               </div>

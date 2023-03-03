@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../app/slices/authSlice";
 import queryString from "query-string";
-import productsApi from "../../app/api/productsApi";
 
 function Header() {
   const { auth } = useSelector((state) => state.auth);
@@ -11,7 +10,6 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [term, setTerm] = useState("");
-  const [products,setProducts] = useState([]);
 
   //search product
   // Khởi tạo state ban đầu dựa trên url hiện tại
@@ -32,9 +30,9 @@ function Header() {
 
   //lọc theo search
   const handleSearch = () => {
-    const params = { ...filter, search: term};
+    const params = { ...filter, search: term };
     navigate({
-      pathname: location.pathname, // http://localhost:3000
+      pathname: "/products", // set pathname
       search: queryString.stringify(params, {
         // category=sylas&name=abc
         skipEmptyString: true,
@@ -61,6 +59,10 @@ function Header() {
       navigate("user/history-order");
     }
   };
+
+  const HandleAdminControll = () =>{
+    navigate("/admin");
+  }
   return (
     <div id="header">
       <div className="container ">
@@ -133,20 +135,28 @@ function Header() {
                       >
                         <div className="dropdown-divider"></div>
                         <button className="dropdown-item" onClick={handleLogin}>
-                          Đăng Nhập
+                          Login
                         </button>
                         <button
                           className="dropdown-item"
                           onClick={handleLogout}
                         >
-                          Đăng xuất
+                          Logout
                         </button>
                         <button
                           className="dropdown-item"
                           onClick={handleHistoryOrder}
                         >
-                          Lịch Sử Mua Hàng
+                          History Order
                         </button>
+                        {auth?.roles[0] === "ADMIN" && (
+                          <button
+                            onClick={HandleAdminControll}
+                            className="dropdown-item"
+                          >
+                            Admin
+                          </button>
+                        )}
                       </div>
                     </li>
                   </ul>

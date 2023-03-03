@@ -7,7 +7,7 @@ export const userService = baseApi.injectEndpoints({
         }),
         getUserById:builder.query({
             query: (id) => `/users/${id}`,
-          
+            method: "GET",
         }),
         deleteUser: builder.mutation({
             query: (id) => ({
