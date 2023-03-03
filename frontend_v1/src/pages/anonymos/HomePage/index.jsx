@@ -2,11 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import productsApi from "../../../app/api/productsApi";
 import queryString from "query-string";
-import categoryApi from "../../../app/api/categoryApi";
 
 function Home() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -97,6 +95,82 @@ function Home() {
           <button className="btn btn-outline-secondary ">Detail</button>
           </Link>
         </div>
+      </div>
+
+      <div
+        id="carouselExampleSlidesOnly"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
+          <Link to={"/products?category=Makeup"}>
+          <img
+          src="https://www.dior.com/couture/var/dior/storage/images/36552743/12-eng-GB/pcd-cover-dior-addict3_1440_1200.jpg"
+            alt="..."
+          />
+          </Link>
+         
+        </div>
+        <h5 className="multiline-text d-flex  text-dark mx-2 mt-2 ">
+        Makeup
+        </h5>
+      </div>
+
+      <div
+        id="carouselExampleSlidesOnly"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
+          <Link to={"/products?category=SkinCare"}>
+          <img
+          src="https://www.dior.com/couture/var/dior/storage/images/37984931/6-eng-GB/cover-soin-capture-totale4_1440_1200.jpg"
+            alt="..."
+          />
+          </Link>
+         
+        </div>
+        <h5 className="multiline-text d-flex  text-dark mx-2 mt-2 ">
+        Skincare
+        </h5>
+      </div>
+
+      <div
+        id="carouselExampleSlidesOnly"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
+          <Link to={"/products?category=MEN%27S%20FRAGRANCE"}>
+          <img
+          src="https://www.dior.com/couture/var/dior/storage/images/horizon/beauty/mens-fragrance/new/p1-dior-homme-sport-20232/38966412-2-eng-GB/p2-dior-homme-sport-20232_1440_1200.jpg"
+            alt="..."
+          />
+          </Link>
+         
+        </div>
+        <h5 className="multiline-text d-flex  text-dark mx-2 mt-2 ">
+        MEN'S FRAGRANCE
+        </h5>
+      </div>
+
+      <div
+        id="carouselExampleSlidesOnly"
+        className="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div className="carousel-inner">
+          <Link to={"/products?category=WOMEN%27S%20FRAGRANCE"}>
+          <img
+          src="https://www.dior.com/couture/var/dior/storage/images/39005290/2-eng-GB/pcd-miss-dior13_1440_1200.jpg"
+            alt="..."
+          />
+          </Link>
+         
+        </div>
+        <h5 className="multiline-text d-flex  text-dark mx-2 mt-2 ">
+        WOMEN'S FRAGRANCE
+        </h5>
       </div>
     </div>
   );
