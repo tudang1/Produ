@@ -16,7 +16,20 @@ export const orderUserService = baseUserApi.injectEndpoints({
                 body: data
             })
         }),
+        deleteOrderUser: builder.mutation({
+            query: (id) => ({
+                url: `/orders/${id}`,
+                method: "DELETE"
+            }),
+            transformResponse: (response, meta, arg) => {
+                return arg
+            }
+        }),
     })
 })
 
-export const { useCreateOrderMutation ,useGetOrderByUseridQuery} = orderUserService
+export const { 
+    useCreateOrderMutation ,
+    useGetOrderByUseridQuery,
+    useDeleteOrderUserMutation,
+} = orderUserService

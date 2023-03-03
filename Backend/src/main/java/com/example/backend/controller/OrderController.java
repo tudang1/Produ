@@ -40,8 +40,14 @@ public class OrderController {
 
     //tao order
     @PostMapping("user/orders")
-    public Order creatOrderUser(@RequestBody UpsertOrderRequest request) {
+    public Order createOrderUser(@RequestBody UpsertOrderRequest request) {
         return orderService.createOrderUser(request);
+    }
+
+    //delete order
+    @DeleteMapping("user/orders/{id}")
+    public void deleteOrderUser(@PathVariable Integer id){
+        orderService.deleteOrderUser(id);
     }
 
 }

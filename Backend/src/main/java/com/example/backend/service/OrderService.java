@@ -43,6 +43,7 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    // phía User
     public List<Order> getHistoryOrderUser(Integer userId) {
 //        List<Order> test = orderRepository.findByAccount_IdOrderByCreateAtAsc(userId);
         List<Order> allOrders = orderRepository.findAll();
@@ -79,5 +80,12 @@ public class OrderService {
         Set<OrderItem> orderItems = orderItemRepository.findByIdIn(request.getOrderItemIds());
         order.setOrderItems(orderItems);
         return orderRepository.save(order);
+    }
+
+    public void deleteOrderUser(Integer id) {
+        Order order = orderRepository.findById(id).orElseThrow(()->{
+            throw new NotFoundException("Not found Order with id = " + id);
+        });
+        orderRepository.delete(order);
     }
 }

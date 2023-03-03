@@ -59,10 +59,10 @@ function OrderListAdmin() {
                   <td>
                     <Link to={`/admin/orders/${order.id}`}>
                       {order.status === false && (
-                        <p style={{ color: "red" }}>Chưa xác nhận</p>
+                        <p style={{ color: "red" }}>Unconfirmed</p>
                       )}
                       {order.status === true && (
-                        <p style={{ color: "#00CC00" }}>Đã xác nhận</p>
+                        <p style={{ color: "#00CC00" }}>Comfirm</p>
                       )}
                     </Link>
                   </td>

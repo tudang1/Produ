@@ -9,12 +9,30 @@ import {
   useUpdateUserMutation,
   useUploadAvatarMutation,
 } from "../../../../app/services/userService";
+import { useGetOrderByUseridQuery } from "../../../../app/services/orderUserService";
+import { convertDate } from "../../../../utils/utils";
 
 function UserAdminDetail() {
   const navigate = useNavigate();
   const { userId } = useParams();
   const { isLoading } = useGetUsersQuery();
   const { users } = useSelector((state) => state.users);
+
+  const { isLoading2 } = useGetOrderByUseridQuery(userId);
+  const { ordersUser } = useSelector((state) => state.ordersUser);
+
+
+  
+
+  const sum = (order) => {
+    let sumPrice = 0;
+    for (let i = 0; i < order?.orderItems.length; i++) {
+      sumPrice +=
+        order.orderItems[i].product.price * order.orderItems[i].amount;
+    }
+    return sumPrice;
+  };
+
   // const [oldPassword, setOldPassword] = useState("");
   // const [newPassWord, setNewPassword] = useState("");
   // const [defaultPassword, setDefaultPassword] = useState("");
@@ -75,7 +93,7 @@ function UserAdminDetail() {
       .catch((err) => alert(err));
   };
 
-  if (isLoading) {
+  if (isLoading && isLoading2) {
     return <h3>Loading ...</h3>;
   }
 
@@ -199,118 +217,113 @@ function UserAdminDetail() {
         </div>
       </div>
 
-      {/* <div
-        className="modal fade"
-        id="modal-change-password"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
-                Đổi mật khẩu
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="mb-3">
-                <label className="col-form-label">Mật khẩu cũ</label>
-                <input
-                  type="text"
-                  id="old-password"
-                  value={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                  className="form-control"
-                />
-              </div>
-              <div className="mb-3">
-                <label className="col-form-label">Mật khẩu mới</label>
-                <input
-                  type="text"
-                  id="new-password"
-                  value={newPassWord}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  className="form-control"
-                />
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Đóng
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                id="btn-change-password"
-                onClick={changePassword}
-              >
-                Xác nhận
-              </button>
+      <hr />
+      <div className="shopping-cart-container mt-3">
+      <div className="container">
+        <div className="row">
+          <div className="col-md-12">
+            <div className="mb-2">
+              <h4 className="d-flex justify-content-center">History Order</h4>
             </div>
           </div>
         </div>
-      </div> */}
+        <div className="row shopping-cart">
+          {ordersUser.length === 0 && (
+            <p className="fst-italic message"> Bạn chưa đặt đơn hàng nào</p>
+          )}
+          {ordersUser.length > 0 &&
+            ordersUser.map((historyOrder) => (
+              <div key={historyOrder.id} className="container mt-3 mb-5">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="mb-2">
+                      <div>
+                        Status Order:
+                        {historyOrder.status === false && (
+                          <h4 style={{ color: "red" }}>Unconfirmed</h4>
+                        )}
+                        {historyOrder.status === true && (
+                          <h4 style={{ color: "#00CC00" }}>Delivery</h4>
+                        )}
+                      </div>
+                      <p>CreateAt: {convertDate(historyOrder.createAt)}</p>
+                      <p>Address: {historyOrder.address}</p>
+                    </div>
+                  </div>
+                </div>
 
-      {/* <div
-        className="modal fade"
-        id="modal-forgot-password"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="staticBackdropLabel">
-                Quên mật khẩu
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <div className="mb-3">
-                <h5>Mật khẩu mới của bạn là:{defaultPassword}</h5>
+                <div className="row shopping-cart">
+                  <div className="col-md-8">
+                    <div className="product-list">
+                      {historyOrder?.orderItems.length > 0 &&
+                        historyOrder?.orderItems.map((orderItem) => (
+                          <div
+                            key={orderItem.id}
+                            className="product-item d-flex border mb-2"
+                          >
+                            <div className="anh ">
+                              <img
+                                src={orderItem.product.thumbnail}
+                                alt="sản phẩm 1"
+                              />
+                            </div>
+                            <div className="info d-flex flex-column justify-content-between px-4 py-2 flex-grow-1">
+                              <div>
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <h2 className="text-dark fs-5 fw-normal">
+                                    {orderItem.product.title}
+                                  </h2>
+                                  <h2 className="text-danger fs-5 fw-normal">
+                                    {orderItem.product.price.toLocaleString(
+                                      "en"
+                                    )}
+                                  </h2>
+                                </div>
+                                <div className="text-black-50">
+                                  <div className="d-inline-block me-3">
+                                    <span className="py-4  d-inline-block fw-bold">
+                                      Quantity: {orderItem.amount}
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div></div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                  <div className="col-md-4">
+                    <div className="bill">
+                      <div className="border mb-2 p-3 fw-normal d-flex justify-content-between align-items-center">
+                        <span className="text-black-50">Total:</span>
+                        <span className="text-primary" id="sub-total-money">
+                          $ {sum(historyOrder).toLocaleString("en")}
+                        </span>
+                      </div>
+                      <div className="border mb-2 p-3 fw-normal d-flex justify-content-between align-items-center">
+                        <span className="text-black-50">VAT (10%):</span>
+                        <span className="text-primary" id="vat-money">
+                          $ {(sum(historyOrder) * 0.1).toLocaleString("en")}
+                        </span>
+                      </div>
+                      <div className="border mb-2 p-3 fw-normal d-flex justify-content-between align-items-center">
+                        <span className="text-black-50">SubTotal:</span>
+                        <span className="text-primary" id="total-money">
+                          $ {(sum(historyOrder) * 1.1).toLocaleString("en")}
+                        </span>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
+                <hr />
               </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Đóng
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#modal-change-password"
-              >
-                Đổi mật khẩu
-              </button>
-            </div>
-          </div>
+            ))}
         </div>
-      </div> */}
+      </div>
+    </div>
+
       <ToastContainer position="top-center" />
     </div>
   );

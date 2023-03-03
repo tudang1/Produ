@@ -16,6 +16,10 @@ const orderUserSlice = createSlice({
             state.ordersUser.push(action.payload);
             // state.ordersUser.splice(0, 0, action.payload);
         })
+        builder.addMatcher(orderUserService.endpoints.deleteOrderUser.matchFulfilled, (state, action) =>{
+            let index = state.ordersUser.findIndex(order => order.id === action.payload);
+            state.ordersUser.splice(index, 1);
+        })
     }
 });
 

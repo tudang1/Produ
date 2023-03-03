@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 import { useConfirmOrderMutation, useGetOrdersQuery} from "../../../../app/services/orderAdminService";
 import { convertDate } from "../../../../utils/utils";
@@ -19,25 +19,28 @@ function OrderDetailAdmin() {
   if (isLoading) {
     return <h3>Loading ...</h3>;
   }
-
+ console.log(order);
   let sumPrice = 0;
-  //   for (let i = 0; i < order?.orderItems.length; i++) {
-  //     sumPrice += order.orderItems[i].product.price * order.orderItems[i].amount;
-  //   }
+  order.orderItems.map((item) => {
+    const price = item.product.price;
+    return (sumPrice += price * item.amount);
+  });
 
   let vat = sumPrice * 0.1;
   let sum = sumPrice + vat;
-  const HandleConfirm = (id) => {
+
+  const handleConfirm = (id) => {
     confirmOrder(id)
       .unwrap()
-      .then((res) => {
-        toast.success("Đã xác nhận đơn hàng");
+      .then(() => {
+        alert("Comfirm...");
         setTimeout(() => {
           navigate(`/admin/orders`);
-        }, 1500);
+        }, 500);
       })
       .catch((err) => console.log(err));
   };
+
   return (
     <div className="shopping-cart-container mt-3">
       <div className="container">
@@ -86,7 +89,7 @@ function OrderDetailAdmin() {
                     <div className="anh ">
                       <img src={orderItem.product.thumbnail} alt="sản phẩm 1" />
                     </div>
-                    <div className="info d-flex flex-column justify-content-between px-3 py-3 flex-grow-1">
+                    <div className="info d-flex flex-column justify-content-between px-4 py-2 flex-grow-1">
                       <div>
                         <div className="d-flex justify-content-between align-items-center">
                           <h6 className="text-dark fw-normal">
@@ -112,28 +115,28 @@ function OrderDetailAdmin() {
           </div>
           <div className="col-md-4">
             <div className="bill">
-              <div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">
+              <div className="border mb-2 p-3 fw-normal d-flex justify-content-between align-items-center">
                 <span className="text-black-50">Total:</span>
                 <span className="text-primary" id="sub-total-money">
-                  {sumPrice.toLocaleString("en")} VND
+                 $ {sumPrice.toLocaleString("en")}
                 </span>
               </div>
-              <div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">
+              <div className="border mb-2 p-3 fw-normal d-flex justify-content-between align-items-center">
                 <span className="text-black-50">VAT (10%):</span>
                 <span className="text-primary" id="vat-money">
-                  {vat.toLocaleString("en")} VND
+                 $ {vat.toLocaleString("en")}
                 </span>
               </div>
-              <div className="border mb-2 p-3 fs-5 fw-normal d-flex justify-content-between align-items-center">
+              <div className="border mb-2 p-3 fw-normal d-flex justify-content-between align-items-center">
                 <span className="text-black-50">SubTotal:</span>
                 <span className="text-primary" id="total-money">
-                  {sum.toLocaleString("en")} VND
+                 $ {sum.toLocaleString("en")}
                 </span>
               </div>
 
               {order?.status === false && (
                 <button
-                  onClick={() => HandleConfirm(orderId)}
+                  onClick={() => handleConfirm(orderId)}
                   className="btn btn-success"
                 >
                   Comfirm
