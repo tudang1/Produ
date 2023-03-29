@@ -36,7 +36,7 @@ public class AccountService {
     //createAccountByAdmin
     public Account createAccountByAdmin(CreateAccountRequest request) {
         if (accountRepository.findByEmail(request.getEmail()).isPresent()){
-            throw new BadRequestException("email = " + request.getEmail() + " is existed");
+            throw new BadRequestException(request.getEmail() + " is existed");
         }
 
         Account newAccount = Account.builder()
@@ -55,7 +55,7 @@ public class AccountService {
     //createAccountByAny
     public Account createAccountByAny(CreateAccountRequest request) {
         if (accountRepository.findByEmail(request.getEmail()).isPresent()){
-            throw new BadRequestException("email = " + request.getEmail() + " is existed");
+            throw new BadRequestException(request.getEmail() + " is existed");
         }
 
         Account newAccount = Account.builder()

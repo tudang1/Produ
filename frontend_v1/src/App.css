@@ -3143,3 +3143,12 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     justify-content: center;
     align-items: center;
 }
+
+.arm {
+    color: #bf1650;
+  }
+  
+.arm::before {
+    display: inline;
+    content: "⚠ ";
+  }

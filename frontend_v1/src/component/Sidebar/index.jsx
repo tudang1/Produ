@@ -9,23 +9,6 @@ function Sidebar() {
 
   const [categories, setCategories] = useState([]);
 
-  // // Khởi tạo state ban đầu dựa trên url hiện tại
-  // const [filter, setFilter] = useState(() => {
-  //   const params = queryString.parse(location.search);
-  //   return {
-  //     category: params.category || "",
-  //   };
-  // });
-
-  // // Khi url thay đổi => parse lại url => lưu vào state
-  // useEffect(() => {
-  //   const params = queryString.parse(location.search);
-  //   setFilter({
-  //     category: params.category || "",
-  //   });
-  // }, [location.search]);
-
-  // Lấy danh sách category
   useEffect(() => {
     const fetchCategoies = async () => {
       try {
