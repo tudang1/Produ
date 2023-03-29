@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.entity.Account;
 import com.example.backend.entity.Category;
 import com.example.backend.entity.Product;
 import com.example.backend.exception.NotFoundException;
@@ -57,4 +58,5 @@ public class WebService {
             throw new NotFoundException("Not found Product with id = " + id);
         });
     }
+
 }

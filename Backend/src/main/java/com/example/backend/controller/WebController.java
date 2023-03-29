@@ -1,7 +1,10 @@
 package com.example.backend.controller;
 
+import com.example.backend.entity.Account;
 import com.example.backend.entity.Category;
 import com.example.backend.entity.Product;
+import com.example.backend.request.CreateAccountRequest;
+import com.example.backend.service.AccountService;
 import com.example.backend.service.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +17,8 @@ public class WebController {
     @Autowired
     private WebService webService;
 
+    @Autowired
+    private AccountService accountService;
 //    @GetMapping("/products")
 //    public List<Product> getAllProducts(){
 //        return webService.getAllProducts();
@@ -51,5 +56,9 @@ public class WebController {
         return webService.getCategories();
     }
 
-
+    // tao account
+    @PostMapping("/register")
+    public Account createAcc(@RequestBody CreateAccountRequest request){
+        return accountService.createAccountByAny(request);
+    }
 }

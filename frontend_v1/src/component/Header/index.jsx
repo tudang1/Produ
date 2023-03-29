@@ -5,7 +5,7 @@ import { logout } from "../../app/slices/authSlice";
 import queryString from "query-string";
 
 function Header() {
-  const { auth } = useSelector((state) => state.auth);
+  const { auth, isAuthenticated } = useSelector((state) => state.auth);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -60,9 +60,13 @@ function Header() {
     }
   };
 
-  const HandleAdminControll = () =>{
+  const HandleAdminControll = () => {
     navigate("/admin");
-  }
+  };
+
+  const handleRegister = () => {
+    navigate("/register");
+  };
   return (
     <div id="header">
       <div className="container ">
@@ -137,24 +141,39 @@ function Header() {
                         <button className="dropdown-item" onClick={handleLogin}>
                           Login
                         </button>
-                        <button
+                        {isAuthenticated && (
+                          <button
                           className="dropdown-item"
                           onClick={handleLogout}
                         >
                           Logout
                         </button>
-                        <button
-                          className="dropdown-item"
-                          onClick={handleHistoryOrder}
-                        >
-                          History Order
-                        </button>
+                        )}
+                        
+                        {isAuthenticated && (
+                          <button
+                            className="dropdown-item"
+                            onClick={handleHistoryOrder}
+                          >
+                            History Order
+                          </button>
+                        )}
+
                         {auth?.roles[0] === "ADMIN" && (
                           <button
                             onClick={HandleAdminControll}
                             className="dropdown-item"
                           >
                             Admin
+                          </button>
+                        )}
+                        
+                        {!isAuthenticated && (
+                          <button
+                            onClick={handleRegister}
+                            className="dropdown-item"
+                          >
+                            Register
                           </button>
                         )}
                       </div>

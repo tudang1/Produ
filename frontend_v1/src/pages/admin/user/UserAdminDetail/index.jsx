@@ -21,9 +21,6 @@ function UserAdminDetail() {
   const { isLoading2 } = useGetOrderByUseridQuery(userId);
   const { ordersUser } = useSelector((state) => state.ordersUser);
 
-
-  
-
   const sum = (order) => {
     let sumPrice = 0;
     for (let i = 0; i < order?.orderItems.length; i++) {

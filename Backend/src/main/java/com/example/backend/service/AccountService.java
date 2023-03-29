@@ -44,12 +44,14 @@ public class AccountService {
                 .email(request.getEmail())
                 .phone(request.getPhone())
                 .address(request.getAddress())
+                .active(true)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(request.getRoles())
                 .build();
         accountRepository.save(newAccount);
         return newAccount;
     }
+
     //createAccountByAny
     public Account createAccountByAny(CreateAccountRequest request) {
         if (accountRepository.findByEmail(request.getEmail()).isPresent()){
@@ -61,12 +63,14 @@ public class AccountService {
                 .email(request.getEmail())
                 .phone(request.getPhone())
                 .address(request.getAddress())
+                .active(true)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .roles(List.of("USER"))
                 .build();
         accountRepository.save(newAccount);
         return newAccount;
     }
+
     //updateAccountByAdmin
     public Account updateAccountByAdmin(Integer id, UpsertAccount request) {
         Account account = accountRepository.findById(id).orElseThrow(()->{

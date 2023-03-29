@@ -19,7 +19,7 @@ function OrderDetailAdmin() {
   if (isLoading) {
     return <h3>Loading ...</h3>;
   }
- console.log(order);
+
   let sumPrice = 0;
   order.orderItems.map((item) => {
     const price = item.product.price;
@@ -33,7 +33,7 @@ function OrderDetailAdmin() {
     confirmOrder(id)
       .unwrap()
       .then(() => {
-        alert("Comfirm...");
+        alert("Comfirm...")
         setTimeout(() => {
           navigate(`/admin/orders`);
         }, 500);

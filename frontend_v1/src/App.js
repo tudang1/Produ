@@ -18,6 +18,7 @@ import UserAdminList from './pages/admin/user/UserAdminList';
 import Home from './pages/anonymos/HomePage';
 import ProductDetail from './pages/anonymos/ProductDetail';
 import ProductsFindByCategory from './pages/anonymos/ProductsFindByCategory';
+import RegisterByAny from './pages/anonymos/Register';
 import Cart from './pages/order/Cart';
 import HistoryOrder from './pages/order/HistoryOrder';
 
@@ -31,6 +32,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='products' element={<ProductsFindByCategory/>}/>
           <Route path='products/:productId' element={<ProductDetail/>} />
+          <Route path='register' element={<RegisterByAny/>}/>
 
            {/* User  */}
            <Route path="user">
